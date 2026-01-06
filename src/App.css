@@ -137,6 +137,9 @@
   border: none;
   cursor: pointer;
   z-index: 102;
+  opacity: 0;
+  animation: fadeInProceedToBottomRight 1s cubic-bezier(0.4, 0, 0.2, 1) 0.1s
+    forwards;
 }
 .proceed-square {
   width: 32px;
@@ -422,4 +425,15 @@
 .big-heading-input::placeholder {
   color: #a0a4ab;
   opacity: 1;
+}
+
+@keyframes fadeInProceedToBottomRight {
+  from {
+    opacity: 0;
+    transform: translate(-50vw, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
 }
