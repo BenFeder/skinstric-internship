@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "../App.css";
+import TopNav from "../components/TopNav";
 
 function Home() {
   const navigate = useNavigate();
@@ -8,13 +9,7 @@ function Home() {
 
   return (
     <div className="app">
-      <div className="top-nav">
-        <div className="top-nav-left">
-          <span className="brand-name">SKINSTRIC</span>
-          <span className="intro-text">[INTRO]</span>
-        </div>
-        <div className="enter-code-btn">ENTER CODE</div>
-      </div>
+      <TopNav />
       <div className="rectangle-left"></div>
       <button className="discover-ai-btn" onClick={() => {}}>
         <span className="arrow-icon-left">←</span>
