@@ -8,6 +8,13 @@ function Home() {
 
   return (
     <div className="app">
+      <div className="top-nav">
+        <div className="top-nav-left">
+          <span className="brand-name">SKINSTRIC</span>
+          <span className="intro-text">[INTRO]</span>
+        </div>
+        <div className="enter-code-btn">ENTER CODE</div>
+      </div>
       <div className="rectangle-left"></div>
       <button className="discover-ai-btn" onClick={() => {}}>
         <span className="arrow-icon-left">←</span>
@@ -18,8 +25,8 @@ function Home() {
         <br />
         skincare
       </h1>
-      <button 
-        className="take-test-btn" 
+      <button
+        className="take-test-btn"
         onClick={() => navigate("/testing")}
         onMouseEnter={() => setIsHoveringTest(true)}
         onMouseLeave={() => setIsHoveringTest(false)}
@@ -28,6 +35,10 @@ function Home() {
         <span className="arrow-icon">→</span>
       </button>
       <div className="rectangle-right"></div>
+      <p className="bottom-description">
+        SKINSTRIC DEVELOPED AN A.I. THAT CREATES A HIGHLY-PERSONALIZED ROUTINE.
+        TAILORED TO WHAT YOUR SKIN NEEDS.
+      </p>
     </div>
   );
 }
