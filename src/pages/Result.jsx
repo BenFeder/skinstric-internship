@@ -76,15 +76,25 @@ const Result = () => {
   return (
     <div
       style={{
-        display: "flex",
-        justifyContent: "space-around",
-        alignItems: "center",
+        position: "relative",
+        width: "100vw",
         height: "100vh",
-        background: "#000",
+        background: "#fff",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
-      {/* Left: Camera */}
-      <RotatingSquares size={120}>
+      {/* Camera Button */}
+      <div
+        style={{
+          position: "absolute",
+          left: "35%",
+          top: "50%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 10,
+        }}
+      >
         <button
           onClick={handleCameraClick}
           style={{
@@ -92,43 +102,70 @@ const Result = () => {
             border: "none",
             cursor: "pointer",
             outline: "none",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: 120,
+            height: 120,
           }}
         >
           <img
             src="/assets/camera.png"
             alt="Camera"
-            style={{ width: 64, height: 64, zIndex: 3 }}
+            style={{
+              width: 128,
+              height: 128,
+              zIndex: 3,
+              display: "block",
+              margin: "auto",
+            }}
           />
         </button>
-      </RotatingSquares>
-
-      {/* Right: Gallery */}
-      <RotatingSquares size={120}>
-        <>
-          <button
-            onClick={handleGalleryClick}
+      </div>
+      {/* Gallery Button */}
+      <div
+        style={{
+          position: "absolute",
+          left: "65%",
+          top: "50%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 10,
+        }}
+      >
+        <button
+          onClick={handleGalleryClick}
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            outline: "none",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: 120,
+            height: 120,
+          }}
+        >
+          <img
+            src="/assets/gallery.png"
+            alt="Gallery"
             style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              outline: "none",
+              width: 128,
+              height: 128,
+              zIndex: 3,
+              display: "block",
+              margin: "auto",
             }}
-          >
-            <img
-              src="/assets/gallery.png"
-              alt="Gallery"
-              style={{ width: 64, height: 64, zIndex: 3 }}
-            />
-          </button>
-          <input
-            type="file"
-            accept="image/*"
-            ref={fileInputRef}
-            style={{ display: "none" }}
-            onChange={handleImageChange}
           />
-        </>
-      </RotatingSquares>
+        </button>
+        <input
+          type="file"
+          accept="image/*"
+          ref={fileInputRef}
+          style={{ display: "none" }}
+          onChange={handleImageChange}
+        />
+      </div>
 
       {/* Image Preview Modal */}
       {selectedImage && (

@@ -14,15 +14,16 @@ function TopNav() {
 }
 
 export default TopNav;
-export const RotatingSquares = ({ size, children }) => (
+export const RotatingSquares = ({ size, rotation = 0, children }) => (
   <div
     style={{
-      position: "relative",
+      position: "absolute",
       width: size + 64,
       height: size + 64,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
+      transform: `rotate(${rotation}deg)`,
     }}
   >
     <div
