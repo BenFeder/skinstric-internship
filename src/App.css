@@ -1,3 +1,25 @@
+.center-overlay-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  z-index: 10;
+}
+.rotating-content-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  /* Counter-rotate to keep content upright */
+  transform: rotate(-45deg);
+}
 .app {
   position: relative;
   display: flex;
@@ -340,6 +362,45 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  justify-content: center;
+  z-index: 1;
+}
+
+.rotating-square {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: transparent;
+  animation: rotate360 60s linear infinite;
+  box-sizing: border-box;
+}
+.square-inner {
+  border: 2.5px dashed #6c6f75;
+  background: transparent;
+  z-index: 3;
+  transition: width 0.2s, height 0.2s;
+}
+.square-outer {
+  border: 2.5px dashed #a0a4ab;
+  background: transparent;
+  z-index: 2;
+}
+.square-outermost {
+  border: 2.5px dashed #c7c9ce;
+  background: transparent;
+  z-index: 1;
+}
+@keyframes rotate360 {
+  0% {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(405deg);
+  }
 }
 
 .big-heading-input {

@@ -1,6 +1,6 @@
 import TopNav from "../components/TopNav";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 function Testing() {
   const navigate = useNavigate();
@@ -9,6 +9,15 @@ function Testing() {
   const [city, setCity] = useState("");
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
+  const inputRef = useRef(null);
+  const [inputWidth, setInputWidth] = useState(320);
+
+  useEffect(() => {
+    // Dynamically set the width of the innermost square to fit the input
+    if (inputRef.current) {
+      setInputWidth(inputRef.current.offsetWidth + 48); // add padding for visual space
+    }
+  }, [step, name, city, loading, done]);
 
   const handleNameKeyDown = (e) => {
     if (e.key === "Enter" && name.trim()) {
@@ -33,43 +42,63 @@ function Testing() {
       <TopNav />
       <div className="testing-nav-subtext">TO START ANALYSIS</div>
       <div className="center-content">
-        {!loading && !done && <div className="input-label">CLICK TO TYPE</div>}
-        {step === 0 && !loading && !done && (
-          <input
-            className="big-heading-input"
-            placeholder="Introduce Yourself"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            onKeyDown={handleNameKeyDown}
-            autoFocus
-          />
-        )}
-        {step === 1 && !loading && !done && (
-          <input
-            className="big-heading-input"
-            placeholder="Your city name"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            onKeyDown={handleCityKeyDown}
-            autoFocus
-          />
-        )}
-        {loading && (
-          <>
-            <div className="input-label">Processing submission</div>
-            <div className="loading-dots">
-              <span className="dot" />
-              <span className="dot" />
-              <span className="dot" />
-            </div>
-          </>
-        )}
-        {done && (
-          <div className="thankyou-block">
-            <div className="thankyou-main">Thank you!</div>
-            <div className="thankyou-sub">Proceed for the next step</div>
+        <div
+          className="rotating-square square-outermost"
+          style={{ width: inputWidth + 96, height: inputWidth + 96 }}
+        >
+          <div
+            className="rotating-square square-outer"
+            style={{ width: inputWidth + 48, height: inputWidth + 48 }}
+          >
+            <div
+              className="rotating-square square-inner"
+              style={{ width: inputWidth, height: inputWidth }}
+            ></div>
           </div>
-        )}
+        </div>
+        <div className="center-overlay-content">
+          {!loading && !done && (
+            <div className="input-label">CLICK TO TYPE</div>
+          )}
+          {step === 0 && !loading && !done && (
+            <input
+              className="big-heading-input"
+              placeholder="Introduce Yourself"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              onKeyDown={handleNameKeyDown}
+              autoFocus
+              ref={inputRef}
+            />
+          )}
+          {step === 1 && !loading && !done && (
+            <input
+              className="big-heading-input"
+              placeholder="Your city name"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              onKeyDown={handleCityKeyDown}
+              autoFocus
+              ref={inputRef}
+            />
+          )}
+          {loading && (
+            <>
+              <div className="input-label">Processing submission</div>
+              <div className="loading-dots">
+                <span className="dot" />
+                <span className="dot" />
+                <span className="dot" />
+              </div>
+            </>
+          )}
+          {done && (
+            <div className="thankyou-block">
+              <div className="thankyou-main">Thank you!</div>
+              <div className="thankyou-sub">Proceed for the next step</div>
+            </div>
+          )}
+        </div>
       </div>
       <button className="back-btn" onClick={() => navigate("/")}>
         <span className="back-square">
