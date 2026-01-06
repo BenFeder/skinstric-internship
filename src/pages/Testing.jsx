@@ -9,6 +9,7 @@ function Testing() {
   const [city, setCity] = useState("");
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
+  const [apiMessage, setApiMessage] = useState("");
   const inputRef = useRef(null);
   const [inputWidth, setInputWidth] = useState(320);
 
@@ -26,10 +27,29 @@ function Testing() {
     }
   };
 
-  const handleCityKeyDown = (e) => {
+  const handleCityKeyDown = async (e) => {
     if (e.key === "Enter" && city.trim()) {
       localStorage.setItem("cityName", city.trim());
       setLoading(true);
+      setApiMessage("");
+      try {
+        const response = await fetch(
+          "https://us-central1-frontend-simplified.cloudfunctions.net/skinstricPhaseOne",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: name.trim(), city: city.trim() }),
+          }
+        );
+        const data = await response.json();
+        if (data && data.success) {
+          setApiMessage(data.success);
+        } else {
+          setApiMessage("Submission failed.");
+        }
+      } catch (err) {
+        setApiMessage("Submission failed.");
+      }
       setTimeout(() => {
         setLoading(false);
         setDone(true);
@@ -96,6 +116,11 @@ function Testing() {
             <div className="thankyou-block">
               <div className="thankyou-main">Thank you!</div>
               <div className="thankyou-sub">Proceed for the next step</div>
+              {apiMessage && (
+                <div style={{ marginTop: 16, color: "#222", fontWeight: 500 }}>
+                  {apiMessage}
+                </div>
+              )}
             </div>
           )}
         </div>

@@ -85,7 +85,7 @@ const Result = () => {
         justifyContent: "center",
       }}
     >
-      {/* Camera Button */}
+      {/* ...existing code... */}
       <div
         style={{
           position: "absolute",
