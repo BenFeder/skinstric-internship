@@ -4,7 +4,8 @@
 .proceed-btn {
   /* ...existing styles... */
   opacity: 0;
-  animation: fadeInProceedLeftToRight 1s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
+  animation: fadeInProceedLeftToRight 1s cubic-bezier(0.4, 0, 0.2, 1) 0.1s
+    forwards;
 }
 
 @keyframes fadeInProceedLeftToRight {

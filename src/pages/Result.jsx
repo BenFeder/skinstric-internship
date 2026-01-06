@@ -119,7 +119,7 @@ const Result = () => {
               zIndex: 3,
               display: "block",
               margin: "auto",
-              transition: 'transform 0.2s ease',
+              transition: "transform 0.2s ease",
             }}
           />
         </button>
@@ -158,7 +158,7 @@ const Result = () => {
               zIndex: 3,
               display: "block",
               margin: "auto",
-              transition: 'transform 0.2s ease',
+              transition: "transform 0.2s ease",
             }}
           />
         </button>
