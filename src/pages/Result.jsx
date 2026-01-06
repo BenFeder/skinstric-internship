@@ -112,12 +112,14 @@ const Result = () => {
           <img
             src="/assets/camera.png"
             alt="Camera"
+            className="scalable-image"
             style={{
               width: 128,
               height: 128,
               zIndex: 3,
               display: "block",
               margin: "auto",
+              transition: 'transform 0.2s ease',
             }}
           />
         </button>
@@ -149,12 +151,14 @@ const Result = () => {
           <img
             src="/assets/gallery.png"
             alt="Gallery"
+            className="scalable-image"
             style={{
               width: 128,
               height: 128,
               zIndex: 3,
               display: "block",
               margin: "auto",
+              transition: 'transform 0.2s ease',
             }}
           />
         </button>

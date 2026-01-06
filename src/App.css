@@ -1,3 +1,6 @@
+.scalable-image:hover {
+  transform: scale(1.1);
+}
 .proceed-btn {
   /* ...existing styles... */
   opacity: 0;
