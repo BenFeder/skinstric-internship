@@ -105,11 +105,12 @@
   font-family: roobert, "roobert Fallback", sans-serif;
   color: #1a1b1c;
   text-align: center;
-  transition: transform 0.3s ease;
-  cursor: pointer;
+  transition: transform 0.3s ease, text-align 0.3s ease;
+  font-weight: normal;
+  line-height: 1;
 }
 
-.heading:hover {
+.heading-shifted {
   transform: translateX(-40%);
   text-align: left;
 }
