@@ -1,8 +1,28 @@
+.result-image-btn-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.camera-image {
+  position: static;
+}
+.gallery-image {
+  position: static;
+}
+.result-image:active {
+  transform: scale(1.08);
+}
+.result-image-btn:hover .result-image {
+  transform: scale(1.1);
+}
 /* Additional extracted styles for Testing.jsx and TopNav.jsx */
 
-.testing-outermost {}
-.testing-outer {}
-.testing-inner {}
+.testing-outermost {
+}
+.testing-outer {
+}
+.testing-inner {
+}
 .testing-api-message {
   margin-top: 16px;
   color: #222;
@@ -71,13 +91,13 @@
   justify-content: center;
 }
 .result-camera-block {
-  left: 35%;
-  top: 50%;
+  left: calc(35% + 64px);
+  top: calc(50% + 64px);
   transform: translate(-50%, -50%);
 }
 .result-gallery-block {
-  left: 65%;
-  top: 50%;
+  left: calc(65% + 64px);
+  top: calc(50% + 64px);
   transform: translate(-50%, -50%);
 }
 .result-image-btn {
@@ -93,13 +113,29 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  width: 160px;
+  height: 160px;
+  border-radius: 16px;
+  transition: box-shadow 0.2s;
+}
+.result-image-btn:focus {
+  outline: 2px solid #0078d4;
+  box-shadow: 0 0 0 3px #b3d6fc;
+}
+.result-image-btn:active {
+  box-shadow: 0 0 0 2px #0078d4;
+}
+.result-image-btn:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
 }
 .result-image {
-  width: 128px;
-  height: 128px;
+  width: 100%;
+  height: 100%;
   display: block;
   margin: auto;
   transition: transform 0.2s ease;
+  pointer-events: none;
 }
 .result-file-input {
   display: none;

@@ -32,6 +32,7 @@ export const RotatingSquares = ({ size, rotation = 0, children }) => (
         top: 0,
         left: 0,
         position: "absolute",
+        transform: "rotate(30deg)",
       }}
     ></div>
     <div
@@ -42,6 +43,7 @@ export const RotatingSquares = ({ size, rotation = 0, children }) => (
         top: 16,
         left: 16,
         position: "absolute",
+        transform: "rotate(30deg)",
       }}
     ></div>
     <div
@@ -52,6 +54,7 @@ export const RotatingSquares = ({ size, rotation = 0, children }) => (
         top: 32,
         left: 32,
         position: "absolute",
+        transform: "rotate(30deg)",
       }}
     ></div>
     <div

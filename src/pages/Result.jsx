@@ -38,12 +38,15 @@ const Result = () => {
       {/* ...existing code... */}
       <div className="result-center-block result-camera-block">
         <RotatingSquares size={240}>
-          <div style={{ position: "relative", width: "100%", height: "100%" }}>
-            <button className="result-image-btn" onClick={handleCameraClick}>
+          <div className="result-image-btn-wrapper">
+            <button
+              className="result-image-btn camera-btn"
+              onClick={handleCameraClick}
+            >
               <img
                 src="/assets/camera.png"
                 alt="Camera"
-                className="result-image scalable-image"
+                className="result-image camera-image"
               />
             </button>
           </div>
@@ -52,12 +55,15 @@ const Result = () => {
       {/* Gallery Button */}
       <div className="result-center-block result-gallery-block">
         <RotatingSquares size={240}>
-          <div style={{ position: "relative", width: "100%", height: "100%" }}>
-            <button className="result-image-btn" onClick={handleGalleryClick}>
+          <div className="result-image-btn-wrapper">
+            <button
+              className="result-image-btn gallery-btn"
+              onClick={handleGalleryClick}
+            >
               <img
                 src="/assets/gallery.png"
                 alt="Gallery"
-                className="result-image scalable-image"
+                className="result-image gallery-image"
               />
             </button>
             <input
