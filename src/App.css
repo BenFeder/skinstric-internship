@@ -419,10 +419,10 @@
 }
 @keyframes rotate360 {
   0% {
-    transform: translate(-50%, -50%) rotate(45deg);
+    transform: rotate(45deg);
   }
   100% {
-    transform: translate(-50%, -50%) rotate(405deg);
+    transform: rotate(405deg);
   }
 }
 
