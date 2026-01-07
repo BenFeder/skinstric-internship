@@ -4,19 +4,96 @@ import { useNavigate } from "react-router-dom";
 import { RotatingSquares, default as TopNav } from "../components/TopNav";
 import "../style.css";
 
+// Simple CameraModal for camera permission
 const CameraModal = ({ onAllow, onDeny }) => (
   <div className="result-modal">
-    <div className="result-modal-title">ALLOW A.I. TO ACCESS YOUR CAMERA?</div>
-    <div className="result-modal-btn-row">
-      <button className="result-modal-btn" onClick={onDeny}>
-        DENY
-      </button>
-      <button className="result-modal-btn" onClick={onAllow}>
-        ALLOW
-      </button>
+    <div className="result-modal-content">
+      <h2>Allow Camera Access?</h2>
+      <div style={{ display: "flex", gap: 16, marginTop: 24 }}>
+        <button className="result-modal-btn" onClick={onAllow}>
+          Allow
+        </button>
+        <button className="result-modal-btn" onClick={onDeny}>
+          Deny
+        </button>
+      </div>
     </div>
   </div>
 );
+
+// GalleryApproveModal for gallery image approval and upload
+const GalleryApproveModal = ({ file, onRemove }) => {
+  const [isPosting, setIsPosting] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
+
+  // Convert file to base64
+  const fileToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const handleApprove = async () => {
+    setIsPosting(true);
+    setError(null);
+    try {
+      const base64 = await fileToBase64(file);
+      localStorage.setItem("capturedImage", base64);
+      await fetch(
+        "https://us-central1-frontend-simplified.cloudfunctions.net/skinstricPhaseTwo",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ image: base64 }),
+        }
+      );
+      setSuccess(true);
+      setTimeout(() => {
+        setSuccess(false);
+        onRemove();
+      }, 1200);
+    } catch (err) {
+      setError("Failed to upload image");
+    } finally {
+      setIsPosting(false);
+    }
+  };
+
+  return (
+    <div className="result-preview-modal">
+      <div className="result-preview-title">Preview:</div>
+      <img
+        src={URL.createObjectURL(file)}
+        alt="Uploaded preview"
+        width="250px"
+        className="result-preview-img"
+      />
+      <div style={{ display: "flex", gap: 16, marginTop: 16 }}>
+        <button
+          className="result-preview-btn"
+          onClick={onRemove}
+          disabled={isPosting}
+        >
+          Remove Image
+        </button>
+        <button
+          className="result-preview-btn"
+          onClick={handleApprove}
+          disabled={isPosting}
+        >
+          {isPosting ? "Uploading..." : "Approve Image"}
+        </button>
+      </div>
+
+      {error && <div style={{ color: "red", marginTop: 8 }}>{error}</div>}
+      {success && <div style={{ color: "green", marginTop: 8 }}>Uploaded!</div>}
+    </div>
+  );
+};
 
 const WebcamCaptureModal = ({ onClose }) => {
   const webcamRef = useRef(null);
@@ -36,149 +113,131 @@ const WebcamCaptureModal = ({ onClose }) => {
     localStorage.setItem("capturedImage", imageSrc);
   };
 
+  const handleApprove = async () => {
+    if (!imgSrc) return;
+    try {
+      await fetch(
+        "https://us-central1-frontend-simplified.cloudfunctions.net/skinstricPhaseTwo",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ image: imgSrc }),
+        }
+      );
+    } catch (err) {
+      // Optionally handle error
+      console.error("Failed to POST image:", err);
+    }
+    if (onClose) onClose();
+  };
+
   const retake = () => {
     setImgSrc(null);
     localStorage.removeItem("capturedImage");
   };
 
   return (
-    <div className="result-modal" style={{ justifyContent: "flex-end" }}>
-      <div
-        style={{
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "100%",
-        }}
-      >
-        {imgSrc ? (
+    <div
+      className="result-modal"
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        zIndex: 1000,
+        background: "#000",
+      }}
+    >
+      {imgSrc ? (
+        <>
+          <img
+            src={imgSrc}
+            alt="captured"
+            style={{
+              width: "100vw",
+              height: "100vh",
+              objectFit: "cover",
+              position: "absolute",
+              top: 0,
+              left: 0,
+              zIndex: 1,
+            }}
+          />
           <div
             style={{
+              position: "absolute",
+              bottom: 40,
+              left: 0,
+              width: "100vw",
               display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
+              justifyContent: "center",
+              gap: 24,
+              zIndex: 2,
             }}
           >
-            <img
-              src={imgSrc}
-              alt="captured"
-              style={{
-                maxWidth: 400,
-                maxHeight: 300,
-                borderRadius: 8,
-                marginBottom: 24,
-              }}
-            />
             <button className="result-modal-btn" onClick={retake}>
               Retake Photo
             </button>
-            <button
-              className="result-modal-btn"
-              style={{ marginTop: 12 }}
-              onClick={onClose}
-            >
-              Done
+            <button className="result-modal-btn" onClick={handleApprove}>
+              Approve & Upload
+            </button>
+            <button className="result-modal-btn" onClick={onClose}>
+              Cancel
             </button>
           </div>
-        ) : (
+        </>
+      ) : (
+        <>
+          <Webcam
+            audio={false}
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
+            style={{
+              width: "100vw",
+              height: "100vh",
+              objectFit: "cover",
+              position: "absolute",
+              top: 0,
+              left: 0,
+              zIndex: 1,
+            }}
+          />
           <div
-            style={{ position: "relative", width: "100vw", height: "100vh" }}
+            style={{
+              position: "absolute",
+              bottom: 40,
+              left: 0,
+              width: "100vw",
+              display: "flex",
+              justifyContent: "center",
+              gap: 24,
+              zIndex: 2,
+            }}
           >
-            <Webcam
-              audio={false}
-              ref={webcamRef}
-              screenshotFormat="image/jpeg"
-              style={{
-                width: "100vw",
-                height: "100vh",
-                objectFit: "cover",
-                borderRadius: 0,
-                marginBottom: 0,
-                background: "#000",
-                position: "absolute",
-                top: 0,
-                left: 0,
-                zIndex: 1,
-              }}
-              videoConstraints={{
-                width: { ideal: 1920 },
-                height: { ideal: 1080 },
-                facingMode: "user",
-              }}
-            />
-            <div
-              style={{
-                position: "absolute",
-                bottom: 32,
-                left: 0,
-                width: "100vw",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                zIndex: 2,
-              }}
-            >
-              <div
-                style={{
-                  fontWeight: 600,
-                  fontSize: 18,
-                  marginBottom: 4,
-                  background: "rgba(0,0,0,0.5)",
-                  color: "#fff",
-                  padding: "8px 24px",
-                  borderRadius: 8,
-                }}
-              >
-                TO GET BETTER RESULTS MAKE SURE TO HAVE
-              </div>
-              <div
-                style={{
-                  fontSize: 16,
-                  lineHeight: 1.6,
-                  display: "flex",
-                  gap: 24,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  background: "rgba(0,0,0,0.5)",
-                  color: "#fff",
-                  padding: "6px 18px",
-                  borderRadius: 8,
-                }}
-              >
-                <span>◇ NEUTRAL EXPRESSION</span>
-                <span>◇ FRONTAL POSE</span>
-                <span>◇ ADEQUATE LIGHTING</span>
-              </div>
-              <button
-                className="result-modal-btn"
-                style={{ marginTop: 32 }}
-                onClick={capture}
-              >
-                TAKE PICTURE
-              </button>
-              <button
-                className="result-modal-btn"
-                style={{ marginTop: 12 }}
-                onClick={onClose}
-              >
-                Cancel
-              </button>
-            </div>
+            <button className="result-modal-btn" onClick={capture}>
+              TAKE PICTURE
+            </button>
+            <button className="result-modal-btn" onClick={onClose}>
+              Cancel
+            </button>
           </div>
-        )}
-      </div>
+        </>
+      )}
       <div
         style={{
           position: "absolute",
-          bottom: 32,
+          bottom: 120,
           left: 0,
-          width: "100%",
+          width: "100vw",
           textAlign: "center",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          color: "#fff",
+          zIndex: 3,
         }}
       >
         <div style={{ fontWeight: 600, fontSize: 18, marginBottom: 4 }}>
@@ -283,21 +342,10 @@ const Result = () => {
 
       {/* Image Preview Modal */}
       {selectedImage && (
-        <div className="result-preview-modal">
-          <div className="result-preview-title">Preview:</div>
-          <img
-            src={URL.createObjectURL(selectedImage)}
-            alt="Uploaded preview"
-            width="250px"
-            className="result-preview-img"
-          />
-          <button
-            className="result-preview-btn"
-            onClick={() => setSelectedImage(null)}
-          >
-            Remove Image
-          </button>
-        </div>
+        <GalleryApproveModal
+          file={selectedImage}
+          onRemove={() => setSelectedImage(null)}
+        />
       )}
       {/* Back Button Bottom Left */}
       <button
