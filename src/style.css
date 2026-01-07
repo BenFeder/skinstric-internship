@@ -38,6 +38,7 @@
   z-index: 10001;
   transition: background 0.15s;
 }
+
 .result-image {
   background: none;
   border: none;
