@@ -1,0 +1,78 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { default as TopNav } from "../components/TopNav";
+
+const Select = () => {
+  const navigate = useNavigate();
+  return (
+    <div
+      className="select-page-root"
+      style={{ minHeight: "100vh", position: "relative", background: "#fff" }}
+    >
+      <TopNav />
+      <div style={{ marginLeft: 24, marginTop: 56 }}>
+        <div
+          style={{
+            fontWeight: 900,
+            fontSize: 18,
+            marginBottom: 4,
+            letterSpacing: 0.5,
+          }}
+        >
+          A.I. ANALYSIS
+        </div>
+        <div style={{ fontSize: 13, marginBottom: 6 }}>
+          A.I. HAS ESTIMATED THE FOLLOWING.
+        </div>
+        <div style={{ fontSize: 12, marginBottom: 6 }}>
+          FIX ESTIMATED INFORMATION IF NEEDED.
+        </div>
+        {/* Add form fields for race, age, gender, etc. here if needed */}
+      </div>
+      {/* Bottom left BACK button */}
+      <button
+        className="select-back-btn"
+        style={{
+          position: "fixed",
+          bottom: 24,
+          left: 24,
+          display: "flex",
+          alignItems: "center",
+          fontSize: 13,
+          fontWeight: 600,
+          background: "none",
+          border: "none",
+        }}
+        onClick={() => navigate(-1)}
+        aria-label="Back"
+      >
+        <span style={{ fontSize: 18, marginRight: 6 }}>&#8592;</span>
+        <span>BACK</span>
+      </button>
+      {/* Bottom right GET SUMMARY button */}
+      <button
+        className="select-summary-btn"
+        style={{
+          position: "fixed",
+          bottom: 24,
+          right: 24,
+          display: "flex",
+          alignItems: "center",
+          fontSize: 13,
+          fontWeight: 600,
+          background: "none",
+          border: "none",
+        }}
+        onClick={() => {
+          /* Add summary logic here */
+        }}
+        aria-label="Get Summary"
+      >
+        <span>GET SUMMARY</span>
+        <span style={{ fontSize: 18, marginLeft: 6 }}>&#8594;</span>
+      </button>
+    </div>
+  );
+};
+
+export default Select;
