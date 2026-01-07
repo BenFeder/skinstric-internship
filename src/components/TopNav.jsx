@@ -16,13 +16,11 @@ function TopNav() {
 export default TopNav;
 export const RotatingSquares = ({ size, rotation = 0, children }) => (
   <div
+    className="rotating-squares"
     style={{
       position: "absolute",
       width: size + 64,
       height: size + 64,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
       transform: `rotate(${rotation}deg)`,
     }}
   >
@@ -31,9 +29,9 @@ export const RotatingSquares = ({ size, rotation = 0, children }) => (
       style={{
         width: size + 64,
         height: size + 64,
-        position: "absolute",
         top: 0,
         left: 0,
+        position: "absolute",
       }}
     ></div>
     <div
@@ -41,9 +39,9 @@ export const RotatingSquares = ({ size, rotation = 0, children }) => (
       style={{
         width: size + 32,
         height: size + 32,
-        position: "absolute",
         top: 16,
         left: 16,
+        position: "absolute",
       }}
     ></div>
     <div
@@ -51,12 +49,13 @@ export const RotatingSquares = ({ size, rotation = 0, children }) => (
       style={{
         width: size,
         height: size,
-        position: "absolute",
         top: 32,
         left: 32,
+        position: "absolute",
       }}
     ></div>
     <div
+      className="rotating-squares-content"
       style={{
         position: "absolute",
         top: 0,

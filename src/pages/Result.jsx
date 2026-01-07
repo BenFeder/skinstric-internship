@@ -2,56 +2,16 @@ import React, { useState, useRef } from "react";
 import Webcam from "react-webcam";
 import { useNavigate } from "react-router-dom";
 import { RotatingSquares } from "../components/TopNav";
+import "../style.css";
 
 const CameraModal = ({ onAllow, onDeny }) => (
-  <div
-    style={{
-      position: "fixed",
-      top: 0,
-      left: 0,
-      width: "100vw",
-      height: "100vh",
-      background: "rgba(0,0,0,0.95)",
-      color: "#fff",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      zIndex: 9999,
-    }}
-  >
-    <div style={{ fontSize: 24, marginBottom: 32 }}>
-      Allow access to your camera?
-    </div>
-    <div style={{ display: "flex", gap: 24 }}>
-      <button
-        style={{
-          background: "#fff",
-          color: "#000",
-          padding: "12px 32px",
-          fontWeight: 600,
-          fontSize: 18,
-          border: "none",
-          borderRadius: 4,
-          cursor: "pointer",
-        }}
-        onClick={onDeny}
-      >
+  <div className="result-modal">
+    <div className="result-modal-title">Allow access to your camera?</div>
+    <div className="result-modal-btn-row">
+      <button className="result-modal-btn" onClick={onDeny}>
         DENY
       </button>
-      <button
-        style={{
-          background: "#fff",
-          color: "#000",
-          padding: "12px 32px",
-          fontWeight: 600,
-          fontSize: 18,
-          border: "none",
-          borderRadius: 4,
-          cursor: "pointer",
-        }}
-        onClick={onAllow}
-      >
+      <button className="result-modal-btn" onClick={onAllow}>
         ALLOW
       </button>
     </div>
@@ -74,140 +34,56 @@ const Result = () => {
   };
 
   return (
-    <div
-      style={{
-        position: "relative",
-        width: "100vw",
-        height: "100vh",
-        background: "#fff",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
+    <div className="result-page-root">
       {/* ...existing code... */}
-      <div
-        style={{
-          position: "absolute",
-          left: "35%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: 10,
-        }}
-      >
-        <button
-          onClick={handleCameraClick}
-          style={{
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            outline: "none",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 120,
-            height: 120,
-          }}
-        >
-          <img
-            src="/assets/camera.png"
-            alt="Camera"
-            className="scalable-image"
-            style={{
-              width: 128,
-              height: 128,
-              zIndex: 3,
-              display: "block",
-              margin: "auto",
-              transition: "transform 0.2s ease",
-            }}
-          />
-        </button>
+      <div className="result-center-block result-camera-block">
+        <RotatingSquares size={240}>
+          <div style={{ position: "relative", width: "100%", height: "100%" }}>
+            <button className="result-image-btn" onClick={handleCameraClick}>
+              <img
+                src="/assets/camera.png"
+                alt="Camera"
+                className="result-image scalable-image"
+              />
+            </button>
+          </div>
+        </RotatingSquares>
       </div>
       {/* Gallery Button */}
-      <div
-        style={{
-          position: "absolute",
-          left: "65%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: 10,
-        }}
-      >
-        <button
-          onClick={handleGalleryClick}
-          style={{
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            outline: "none",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 120,
-            height: 120,
-          }}
-        >
-          <img
-            src="/assets/gallery.png"
-            alt="Gallery"
-            className="scalable-image"
-            style={{
-              width: 128,
-              height: 128,
-              zIndex: 3,
-              display: "block",
-              margin: "auto",
-              transition: "transform 0.2s ease",
-            }}
-          />
-        </button>
-        <input
-          type="file"
-          accept="image/*"
-          ref={fileInputRef}
-          style={{ display: "none" }}
-          onChange={handleImageChange}
-        />
+      <div className="result-center-block result-gallery-block">
+        <RotatingSquares size={240}>
+          <div style={{ position: "relative", width: "100%", height: "100%" }}>
+            <button className="result-image-btn" onClick={handleGalleryClick}>
+              <img
+                src="/assets/gallery.png"
+                alt="Gallery"
+                className="result-image scalable-image"
+              />
+            </button>
+            <input
+              type="file"
+              accept="image/*"
+              ref={fileInputRef}
+              className="result-file-input"
+              onChange={handleImageChange}
+            />
+          </div>
+        </RotatingSquares>
       </div>
 
       {/* Image Preview Modal */}
       {selectedImage && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            background: "rgba(0,0,0,0.95)",
-            color: "#fff",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 9999,
-          }}
-        >
-          <div style={{ fontSize: 24, marginBottom: 32 }}>Preview:</div>
+        <div className="result-preview-modal">
+          <div className="result-preview-title">Preview:</div>
           <img
             src={URL.createObjectURL(selectedImage)}
             alt="Uploaded preview"
             width="250px"
-            style={{ borderRadius: 8, marginBottom: 24 }}
+            className="result-preview-img"
           />
           <button
+            className="result-preview-btn"
             onClick={() => setSelectedImage(null)}
-            style={{
-              background: "#fff",
-              color: "#000",
-              padding: "12px 32px",
-              fontWeight: 600,
-              fontSize: 18,
-              border: "none",
-              borderRadius: 4,
-              cursor: "pointer",
-            }}
           >
             Remove Image
           </button>

@@ -63,15 +63,15 @@ function Testing() {
       <div className="testing-nav-subtext">TO START ANALYSIS</div>
       <div className="center-content">
         <div
-          className="rotating-square square-outermost"
+          className="rotating-square square-outermost testing-outermost"
           style={{ width: inputWidth + 96, height: inputWidth + 96 }}
         >
           <div
-            className="rotating-square square-outer"
+            className="rotating-square square-outer testing-outer"
             style={{ width: inputWidth + 48, height: inputWidth + 48 }}
           >
             <div
-              className="rotating-square square-inner"
+              className="rotating-square square-inner testing-inner"
               style={{ width: inputWidth, height: inputWidth }}
             ></div>
           </div>
@@ -117,9 +117,7 @@ function Testing() {
               <div className="thankyou-main">Thank you!</div>
               <div className="thankyou-sub">Proceed for the next step</div>
               {apiMessage && (
-                <div style={{ marginTop: 16, color: "#222", fontWeight: 500 }}>
-                  {apiMessage}
-                </div>
+                <div className="testing-api-message">{apiMessage}</div>
               )}
             </div>
           )}
