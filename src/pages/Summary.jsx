@@ -9,6 +9,17 @@ const Summary = () => {
   return (
     <div style={{ minHeight: "100vh", position: "relative", background: "#fff" }}>
       <TopNav />
+      <div style={{ marginLeft: 24, marginTop: 96, marginBottom: 32, maxWidth: "100vw", overflowWrap: "break-word" }}>
+        <div style={{ fontWeight: 900, fontSize: 16, marginBottom: 0, letterSpacing: 0.5, lineHeight: 1 }}>
+          A.I. ANALYSIS
+        </div>
+        <div style={{ fontSize: 72, fontWeight: 'normal', marginBottom: 0, lineHeight: 1 }}>
+          DEMOGRAPHICS
+        </div>
+        <div style={{ fontSize: 14, marginBottom: 0, lineHeight: 1 }}>
+          PREDICTED RACE & AGE
+        </div>
+      </div>
       {/* Bottom left BACK button */}
       <button
         style={{
