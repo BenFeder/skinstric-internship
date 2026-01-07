@@ -46,7 +46,7 @@ const Result = () => {
               <img
                 src="/assets/camera.png"
                 alt="Camera"
-                className="result-image-type camera-image"
+                className="result-image camera-image"
               />
             </button>
           </div>
@@ -63,7 +63,7 @@ const Result = () => {
               <img
                 src="/assets/gallery.png"
                 alt="Gallery"
-                className="result-image-type gallery-image"
+                className="result-image gallery-image"
               />
             </button>
             <input
