@@ -103,32 +103,42 @@ const Summary = () => {
             gap: 6,
           }}
         >
-          {tabOptions.map((tab, idx) => (
-            <div
-              key={tab.key}
-              onClick={() => setSelectedTab(tab.key)}
-              style={{
-                background: selectedTab === tab.key ? "#bdbdbd" : "#e0e0e0",
-                borderRadius: 8,
-                padding: 12,
-                marginBottom: 0,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                cursor: "pointer",
-                border:
-                  selectedTab === tab.key
-                    ? "2px solid #333"
-                    : "2px solid transparent",
-                transition: "background 0.2s, border 0.2s",
-              }}
-            >
-              <div style={{ fontSize: 16, fontWeight: 600, marginBottom: 4 }}>
-                {tab.label}
+          {tabOptions.map((tab, idx) => {
+            // Get top-ranked field for each category
+            const topItem =
+              data[tab.key] && data[tab.key].length > 0
+                ? [...data[tab.key]].sort((a, b) => b.value - a.value)[0]
+                : null;
+            return (
+              <div
+                key={tab.key}
+                onClick={() => setSelectedTab(tab.key)}
+                style={{
+                  background: selectedTab === tab.key ? "#bdbdbd" : "#e0e0e0",
+                  borderRadius: 8,
+                  padding: 12,
+                  marginBottom: 0,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  cursor: "pointer",
+                  border:
+                    selectedTab === tab.key
+                      ? "2px solid #333"
+                      : "2px solid transparent",
+                  transition: "background 0.2s, border 0.2s",
+                }}
+              >
+                <div style={{ fontSize: 16, fontWeight: 600, marginBottom: 4 }}>
+                  {topItem
+                    ? topItem.label.charAt(0).toUpperCase() +
+                      topItem.label.slice(1)
+                    : tab.label}
+                </div>
+                <div style={{ fontSize: 14, color: "#555" }}>{tab.display}</div>
               </div>
-              <div style={{ fontSize: 14, color: "#555" }}>{tab.display}</div>
-            </div>
-          ))}
+            );
+          })}
         </div>
         {/* Middle Column (1.0) */}
         <div
@@ -147,9 +157,18 @@ const Summary = () => {
         >
           {/* Data heading: selected field label or default */}
           <div
-            style={{ fontSize: 20, fontWeight: 700, alignSelf: "flex-start", textTransform: "capitalize" }}
+            style={{
+              fontSize: 20,
+              fontWeight: 700,
+              alignSelf: "flex-start",
+              textTransform: "capitalize",
+            }}
           >
-            {selectedField ? selectedField.label.charAt(0).toUpperCase() + selectedField.label.slice(1) : selected.label.charAt(0).toUpperCase() + selected.label.slice(1)}
+            {selectedField
+              ? selectedField.label.charAt(0).toUpperCase() +
+                selectedField.label.slice(1)
+              : selected.label.charAt(0).toUpperCase() +
+                selected.label.slice(1)}
           </div>
           {/* Percentage Circle: show selected field's value or default */}
           <div
@@ -177,7 +196,15 @@ const Summary = () => {
                 stroke="#333"
                 strokeWidth="8"
                 strokeDasharray={2 * Math.PI * 120}
-                strokeDashoffset={2 * Math.PI * 120 * (1 - (selectedField ? selectedField.value : (data[selected.key][0]?.value || 0)))}
+                strokeDashoffset={
+                  2 *
+                  Math.PI *
+                  120 *
+                  (1 -
+                    (selectedField
+                      ? selectedField.value
+                      : data[selected.key][0]?.value || 0))
+                }
                 transform="rotate(-90 130 130)"
                 style={{ transition: "stroke-dashoffset 0.5s" }}
               />
@@ -189,7 +216,10 @@ const Summary = () => {
                 fontWeight="bold"
                 fill="#222"
               >
-                {selectedField ? Math.round(selectedField.value * 100) : Math.round((data[selected.key][0]?.value || 0) * 100)}%
+                {selectedField
+                  ? Math.round(selectedField.value * 100)
+                  : Math.round((data[selected.key][0]?.value || 0) * 100)}
+                %
               </text>
             </svg>
           </div>
@@ -246,14 +276,22 @@ const Summary = () => {
                     alignItems: "center",
                     marginBottom: 8,
                     cursor: "pointer",
-                    border: selectedField && selectedField.label === item.label ? "2px solid #333" : "2px solid transparent",
+                    border:
+                      selectedField && selectedField.label === item.label
+                        ? "2px solid #333"
+                        : "2px solid transparent",
                     borderRadius: 6,
-                    background: selectedField && selectedField.label === item.label ? "#d3d3d3" : "transparent",
-                    transition: "background 0.2s, border 0.2s"
+                    background:
+                      selectedField && selectedField.label === item.label
+                        ? "#d3d3d3"
+                        : "transparent",
+                    transition: "background 0.2s, border 0.2s",
                   }}
                   onClick={() => setSelectedField(item)}
                 >
-                  <span style={{ fontSize: 18 }}>{item.label.charAt(0).toUpperCase() + item.label.slice(1)}</span>
+                  <span style={{ fontSize: 18 }}>
+                    {item.label.charAt(0).toUpperCase() + item.label.slice(1)}
+                  </span>
                   <span style={{ fontSize: 18, fontWeight: 600 }}>
                     {Math.round(item.value * 100)}%
                   </span>
