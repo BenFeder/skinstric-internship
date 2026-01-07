@@ -124,7 +124,8 @@ const Summary = () => {
                 key={tab.key}
                 onClick={() => setSelectedTab(tab.key)}
                 style={{
-                  background: selectedTab === tab.key ? "#bdbdbd" : "#e0e0e0",
+                  background: selectedTab === tab.key ? "#111" : "#e0e0e0",
+                  color: selectedTab === tab.key ? "#fff" : "#111",
                   borderRadius: 8,
                   padding: 12,
                   marginBottom: 0,
@@ -136,16 +137,16 @@ const Summary = () => {
                     selectedTab === tab.key
                       ? "2px solid #333"
                       : "2px solid transparent",
-                  transition: "background 0.2s, border 0.2s",
+                  transition: "background 0.2s, border 0.2s, color 0.2s",
                 }}
               >
-                <div style={{ fontSize: 16, fontWeight: 600, marginBottom: 4 }}>
+                <div style={{ fontSize: 16, fontWeight: 600, marginBottom: 4, color: selectedTab === tab.key ? "#fff" : "#111" }}>
                   {topItem
                     ? topItem.label.charAt(0).toUpperCase() +
                       topItem.label.slice(1)
                     : tab.label}
                 </div>
-                <div style={{ fontSize: 14, color: "#555" }}>{tab.display}</div>
+                <div style={{ fontSize: 14, color: selectedTab === tab.key ? "#fff" : "#555" }}>{tab.display}</div>
               </div>
             );
           })}
