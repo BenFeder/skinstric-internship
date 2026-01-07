@@ -43,38 +43,110 @@ const Select = () => {
           zIndex: 10,
         }}
       >
+        {/* Top square */}
+        <div
+          style={{
+            width: 144,
+            height: 144,
+            background: "#bdbdbd", // darker grey
+            borderRadius: 8,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontWeight: 700,
+            fontSize: 16,
+            color: "#222",
+          }}
+        >
+          <span
+            style={{
+              transform: "rotate(-45deg)",
+              display: "inline-block",
+              width: "100%",
+              textAlign: "center",
+            }}
+          >
+            DEMOGRAPHICS
+          </span>
+        </div>
+        {/* Right square */}
         <div
           style={{
             width: 144,
             height: 144,
             background: "#e0e0e0",
             borderRadius: 8,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontWeight: 700,
+            fontSize: 16,
+            color: "#222",
           }}
-        />
+        >
+          <span
+            style={{
+              transform: "rotate(-45deg)",
+              display: "inline-block",
+              width: "100%",
+              textAlign: "center",
+            }}
+          >
+            SKIN TYPE DETAILS
+          </span>
+        </div>
+        {/* Left square */}
         <div
           style={{
             width: 144,
             height: 144,
             background: "#e0e0e0",
             borderRadius: 8,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontWeight: 700,
+            fontSize: 16,
+            color: "#222",
           }}
-        />
+        >
+          <span
+            style={{
+              transform: "rotate(-45deg)",
+              display: "inline-block",
+              width: "100%",
+              textAlign: "center",
+            }}
+          >
+            COSMETIC CONCERNS
+          </span>
+        </div>
+        {/* Bottom square */}
         <div
           style={{
             width: 144,
             height: 144,
             background: "#e0e0e0",
             borderRadius: 8,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontWeight: 700,
+            fontSize: 16,
+            color: "#222",
           }}
-        />
-        <div
-          style={{
-            width: 144,
-            height: 144,
-            background: "#e0e0e0",
-            borderRadius: 8,
-          }}
-        />
+        >
+          <span
+            style={{
+              transform: "rotate(-45deg)",
+              display: "inline-block",
+              width: "100%",
+              textAlign: "center",
+            }}
+          >
+            WEATHER
+          </span>
+        </div>
       </div>
       {/* Bottom left BACK button */}
       <button
