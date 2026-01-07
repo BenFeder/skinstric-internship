@@ -1,3 +1,9 @@
+.result-image-type {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-150%, -150%);
+}
 /* Top nav styles (if not already present) */
 .top-nav {
   position: fixed;
@@ -34,36 +40,35 @@
   z-index: 10001;
   transition: background 0.15s;
 }
-.result-back-btn:hover {
-  background: #f2f2f2;
-}
-.result-back-arrow {
-  font-size: 22px;
-  margin-right: 8px;
+.result-image {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
   display: flex;
   align-items: center;
+  justify-content: center;
+  padding: 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 160px;
+  height: 160px;
+  border-radius: 16px;
+  transition: box-shadow 0.2s, transform 0.2s ease;
 }
-.result-back-text {
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-.result-image-btn-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-.camera-image {
-  position: static;
-}
-.gallery-image {
-  position: static;
+.result-image:focus {
+  outline: 2px solid #0078d4;
+  box-shadow: 0 0 0 3px #b3d6fc;
 }
 .result-image:active {
-  transform: scale(1.08);
+  box-shadow: 0 0 0 2px #0078d4;
+  transform: scale(1.08) translate(-50%, -50%);
 }
-.result-image-btn:hover .result-image {
-  transform: scale(1.1);
+.result-image:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transform: scale(1.1) translate(-50%, -50%);
 }
 /* Additional extracted styles for Testing.jsx and TopNav.jsx */
 

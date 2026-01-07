@@ -40,13 +40,13 @@ const Result = () => {
         <RotatingSquares size={240}>
           <div className="result-image-btn-wrapper">
             <button
-              className="result-image-btn camera-btn"
+              className="result-image camera-btn"
               onClick={handleCameraClick}
             >
               <img
                 src="/assets/camera.png"
                 alt="Camera"
-                className="result-image camera-image"
+                className="result-image-type camera-image"
               />
             </button>
           </div>
@@ -57,13 +57,13 @@ const Result = () => {
         <RotatingSquares size={240}>
           <div className="result-image-btn-wrapper">
             <button
-              className="result-image-btn gallery-btn"
+              className="result-image gallery-btn"
               onClick={handleGalleryClick}
             >
               <img
                 src="/assets/gallery.png"
                 alt="Gallery"
-                className="result-image gallery-image"
+                className="result-image-type gallery-image"
               />
             </button>
             <input
