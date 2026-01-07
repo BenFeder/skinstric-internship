@@ -42,6 +42,16 @@ const Summary = () => {
   // Track which field is selected in the third column
   const [selectedField, setSelectedField] = useState(null);
 
+  // Automatically update selectedField when selectedTab changes
+  React.useEffect(() => {
+    const sorted = data[selectedTab]?.slice().sort((a, b) => b.value - a.value);
+    if (sorted && sorted.length > 0) {
+      setSelectedField(sorted[0]);
+    } else {
+      setSelectedField(null);
+    }
+  }, [selectedTab, data]);
+
   return (
     <div
       style={{ minHeight: "100vh", position: "relative", background: "#fff" }}
