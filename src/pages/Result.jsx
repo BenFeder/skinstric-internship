@@ -84,30 +84,88 @@ const WebcamCaptureModal = ({ onClose }) => {
           </div>
         ) : (
           <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
+            style={{ position: "relative", width: "100vw", height: "100vh" }}
           >
             <Webcam
               audio={false}
               ref={webcamRef}
               screenshotFormat="image/jpeg"
-              width={400}
-              height={300}
-              style={{ borderRadius: 8, marginBottom: 24 }}
+              style={{
+                width: "100vw",
+                height: "100vh",
+                objectFit: "cover",
+                borderRadius: 0,
+                marginBottom: 0,
+                background: "#000",
+                position: "absolute",
+                top: 0,
+                left: 0,
+                zIndex: 1,
+              }}
+              videoConstraints={{
+                width: { ideal: 1920 },
+                height: { ideal: 1080 },
+                facingMode: "user",
+              }}
             />
-            <button className="result-modal-btn" onClick={capture}>
-              TAKE PICTURE
-            </button>
-            <button
-              className="result-modal-btn"
-              style={{ marginTop: 12 }}
-              onClick={onClose}
+            <div
+              style={{
+                position: "absolute",
+                bottom: 32,
+                left: 0,
+                width: "100vw",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                zIndex: 2,
+              }}
             >
-              Cancel
-            </button>
+              <div
+                style={{
+                  fontWeight: 600,
+                  fontSize: 18,
+                  marginBottom: 4,
+                  background: "rgba(0,0,0,0.5)",
+                  color: "#fff",
+                  padding: "8px 24px",
+                  borderRadius: 8,
+                }}
+              >
+                TO GET BETTER RESULTS MAKE SURE TO HAVE
+              </div>
+              <div
+                style={{
+                  fontSize: 16,
+                  lineHeight: 1.6,
+                  display: "flex",
+                  gap: 24,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  background: "rgba(0,0,0,0.5)",
+                  color: "#fff",
+                  padding: "6px 18px",
+                  borderRadius: 8,
+                }}
+              >
+                <span>◇ NEUTRAL EXPRESSION</span>
+                <span>◇ FRONTAL POSE</span>
+                <span>◇ ADEQUATE LIGHTING</span>
+              </div>
+              <button
+                className="result-modal-btn"
+                style={{ marginTop: 32 }}
+                onClick={capture}
+              >
+                TAKE PICTURE
+              </button>
+              <button
+                className="result-modal-btn"
+                style={{ marginTop: 12 }}
+                onClick={onClose}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         )}
       </div>
