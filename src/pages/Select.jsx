@@ -44,7 +44,7 @@ const Select = () => {
         }}
       >
         {/* Top square */}
-        <div
+        <button
           style={{
             width: 144,
             height: 144,
@@ -56,7 +56,13 @@ const Select = () => {
             fontWeight: 700,
             fontSize: 16,
             color: "#222",
+            border: "none",
+            cursor: "pointer",
+            padding: 0,
+            outline: "none",
           }}
+          onClick={() => navigate("/summary")}
+          aria-label="Go to summary"
         >
           <span
             style={{
@@ -68,7 +74,7 @@ const Select = () => {
           >
             DEMOGRAPHICS
           </span>
-        </div>
+        </button>
         {/* Right square */}
         <div
           style={{
