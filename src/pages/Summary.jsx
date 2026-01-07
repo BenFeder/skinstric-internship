@@ -39,6 +39,9 @@ const Summary = () => {
   ];
   const selected = tabOptions.find((t) => t.key === selectedTab);
 
+  // Track which field is selected in the third column
+  const [selectedField, setSelectedField] = useState(null);
+
   return (
     <div
       style={{ minHeight: "100vh", position: "relative", background: "#fff" }}
@@ -142,13 +145,13 @@ const Summary = () => {
             position: "relative",
           }}
         >
-          {/* Data heading (default: race) */}
+          {/* Data heading: selected field label or default */}
           <div
-            style={{ fontSize: 20, fontWeight: 700, alignSelf: "flex-start" }}
+            style={{ fontSize: 20, fontWeight: 700, alignSelf: "flex-start", textTransform: "capitalize" }}
           >
-            race
+            {selectedField ? selectedField.label.charAt(0).toUpperCase() + selectedField.label.slice(1) : selected.label.charAt(0).toUpperCase() + selected.label.slice(1)}
           </div>
-          {/* Percentage Circle */}
+          {/* Percentage Circle: show selected field's value or default */}
           <div
             style={{
               marginLeft: "auto",
@@ -174,7 +177,7 @@ const Summary = () => {
                 stroke="#333"
                 strokeWidth="8"
                 strokeDasharray={2 * Math.PI * 120}
-                strokeDashoffset={2 * Math.PI * 120 * (1 - 0.6)}
+                strokeDashoffset={2 * Math.PI * 120 * (1 - (selectedField ? selectedField.value : (data[selected.key][0]?.value || 0)))}
                 transform="rotate(-90 130 130)"
                 style={{ transition: "stroke-dashoffset 0.5s" }}
               />
@@ -186,7 +189,7 @@ const Summary = () => {
                 fontWeight="bold"
                 fill="#222"
               >
-                60%
+                {selectedField ? Math.round(selectedField.value * 100) : Math.round((data[selected.key][0]?.value || 0) * 100)}%
               </text>
             </svg>
           </div>
@@ -242,7 +245,13 @@ const Summary = () => {
                     justifyContent: "space-between",
                     alignItems: "center",
                     marginBottom: 8,
+                    cursor: "pointer",
+                    border: selectedField && selectedField.label === item.label ? "2px solid #333" : "2px solid transparent",
+                    borderRadius: 6,
+                    background: selectedField && selectedField.label === item.label ? "#d3d3d3" : "transparent",
+                    transition: "background 0.2s, border 0.2s"
                   }}
+                  onClick={() => setSelectedField(item)}
                 >
                   <span style={{ fontSize: 18 }}>{item.label.charAt(0).toUpperCase() + item.label.slice(1)}</span>
                   <span style={{ fontSize: 18, fontWeight: 600 }}>
