@@ -38,7 +38,7 @@ function Testing() {
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name: name.trim(), city: city.trim() }),
+            body: JSON.stringify({ name: name.trim(), location: city.trim() }),
           }
         );
         const data = await response.json();
