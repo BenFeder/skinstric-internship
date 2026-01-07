@@ -29,6 +29,53 @@ const Select = () => {
         </div>
         {/* Add form fields for race, age, gender, etc. here if needed */}
       </div>
+      {/* Centered 4-square wrapper */}
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%) rotate(45deg)",
+          display: "grid",
+          gridTemplateColumns: "repeat(2, 144px)",
+          gridTemplateRows: "repeat(2, 144px)",
+          gap: "3px",
+          zIndex: 10,
+        }}
+      >
+        <div
+          style={{
+            width: 144,
+            height: 144,
+            background: "#e0e0e0",
+            borderRadius: 8,
+          }}
+        />
+        <div
+          style={{
+            width: 144,
+            height: 144,
+            background: "#e0e0e0",
+            borderRadius: 8,
+          }}
+        />
+        <div
+          style={{
+            width: 144,
+            height: 144,
+            background: "#e0e0e0",
+            borderRadius: 8,
+          }}
+        />
+        <div
+          style={{
+            width: 144,
+            height: 144,
+            background: "#e0e0e0",
+            borderRadius: 8,
+          }}
+        />
+      </div>
       {/* Bottom left BACK button */}
       <button
         className="select-back-btn"
