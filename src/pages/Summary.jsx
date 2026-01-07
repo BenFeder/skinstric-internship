@@ -1,29 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import TopNav from "../components/TopNav";
 
 const Summary = () => {
   const navigate = useNavigate();
   // Example data object
-  // Example data with confidence arrays
-  const data = {
-    race: [
-      { label: "Black", value: 0.4 },
-      { label: "Asian", value: 0.3 },
-      { label: "White", value: 0.2 },
-      { label: "Latino", value: 0.1 },
-    ],
-    age: [
-      { label: "18-24", value: 0.1 },
-      { label: "25-34", value: 0.6 },
-      { label: "35-44", value: 0.2 },
-      { label: "45-54", value: 0.1 },
-    ],
-    gender: [
-      { label: "Female", value: 0.7 },
-      { label: "Male", value: 0.3 },
-    ],
-  };
+  // Retrieve API data from localStorage
+  const [data, setData] = useState({ race: [], age: [], gender: [] });
+  useEffect(() => {
+    try {
+      const apiData = JSON.parse(localStorage.getItem("apiData"));
+      if (apiData) {
+        // Normalize API data: convert { key: prob } to [{ label, value }]
+        const normalize = obj =>
+          obj && typeof obj === 'object'
+            ? Object.entries(obj).map(([label, value]) => ({ label, value }))
+            : [];
+        setData({
+          race: normalize(apiData.race),
+          age: normalize(apiData.age),
+          gender: normalize(apiData.gender),
+        });
+        // Log the raw API data for debugging
+        console.log("Retrieved API data from localStorage:", apiData);
+      }
+    } catch (e) {
+      // fallback: leave as empty arrays
+    }
+  }, []);
 
   const [selectedTab, setSelectedTab] = useState("race");
 
@@ -159,11 +163,13 @@ const Summary = () => {
           </div>
         </div>
         {/* Right Column (0.5) */}
-        <div style={{ flex: 0.5, minWidth: 0, marginLeft: 6, background: '#e0e0e0', borderRadius: 12, padding: 24, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', position: 'relative', height: '100%' }}>
-          <div style={{ fontSize: 28, fontWeight: 700, letterSpacing: 1, marginBottom: 8 }}>
-            {selected.display}
+        <div style={{ flex: 0.5, minWidth: 0, marginLeft: 6, background: '#e0e0e0', borderRadius: 12, padding: 24, display: 'flex', flexDirection: 'column', alignItems: 'stretch', position: 'relative', height: '100%' }}>
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 16, width: '100%' }}>
+            <div style={{ fontSize: 28, fontWeight: 700, letterSpacing: 1 }}>
+              {selected.display}
+            </div>
+            <div style={{ marginLeft: 'auto', fontSize: 16, fontWeight: 600, color: '#333' }}>A.I. CONFIDENCE</div>
           </div>
-          <div style={{ fontSize: 16, fontWeight: 600, color: '#333', marginBottom: 16 }}>A.I. CONFIDENCE</div>
           <div style={{ width: '100%' }}>
             {data[selected.key]
               .slice()
