@@ -26,6 +26,7 @@ const GalleryApproveModal = ({ file, onRemove }) => {
   const [isPosting, setIsPosting] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
 
   // Convert file to base64
   const fileToBase64 = (file) => {
@@ -43,7 +44,7 @@ const GalleryApproveModal = ({ file, onRemove }) => {
     try {
       const base64 = await fileToBase64(file);
       localStorage.setItem("capturedImage", base64);
-      await fetch(
+      const response = await fetch(
         "https://us-central1-frontend-simplified.cloudfunctions.net/skinstricPhaseTwo",
         {
           method: "POST",
@@ -51,10 +52,16 @@ const GalleryApproveModal = ({ file, onRemove }) => {
           body: JSON.stringify({ image: base64 }),
         }
       );
+      if (!response.ok) throw new Error("API error");
+      const result = await response.json();
+      if (result && result.data) {
+        localStorage.setItem("apiData", JSON.stringify(result.data));
+      }
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
         onRemove();
+        navigate("/select");
       }, 1200);
     } catch (err) {
       setError("Failed to upload image");
@@ -64,7 +71,7 @@ const GalleryApproveModal = ({ file, onRemove }) => {
   };
 
   return (
-    <div className="result-preview-modal">
+    <div className="result-preview-modal" style={{ position: "relative" }}>
       <div className="result-preview-title">Preview:</div>
       <img
         src={URL.createObjectURL(file)}
@@ -89,6 +96,28 @@ const GalleryApproveModal = ({ file, onRemove }) => {
         </button>
       </div>
 
+      {isPosting && (
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background: "rgba(0,0,0,0.7)",
+            color: "#fff",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: 32,
+            fontWeight: 700,
+            zIndex: 10,
+          }}
+        >
+          ANALYZING IMAGE...
+        </div>
+      )}
+
       {error && <div style={{ color: "red", marginTop: 8 }}>{error}</div>}
       {success && <div style={{ color: "green", marginTop: 8 }}>Uploaded!</div>}
     </div>
@@ -98,6 +127,8 @@ const GalleryApproveModal = ({ file, onRemove }) => {
 const WebcamCaptureModal = ({ onClose }) => {
   const webcamRef = useRef(null);
   const [imgSrc, setImgSrc] = useState(null);
+  const [isPosting, setIsPosting] = useState(false);
+  const navigate = useNavigate();
 
   // Load image from localStorage on component mount
   useEffect(() => {
@@ -115,8 +146,9 @@ const WebcamCaptureModal = ({ onClose }) => {
 
   const handleApprove = async () => {
     if (!imgSrc) return;
+    setIsPosting(true);
     try {
-      await fetch(
+      const response = await fetch(
         "https://us-central1-frontend-simplified.cloudfunctions.net/skinstricPhaseTwo",
         {
           method: "POST",
@@ -126,11 +158,18 @@ const WebcamCaptureModal = ({ onClose }) => {
           body: JSON.stringify({ image: imgSrc }),
         }
       );
+      if (!response.ok) throw new Error("API error");
+      const result = await response.json();
+      if (result && result.data) {
+        localStorage.setItem("apiData", JSON.stringify(result.data));
+      }
     } catch (err) {
       // Optionally handle error
       console.error("Failed to POST image:", err);
     }
+    setIsPosting(false);
     if (onClose) onClose();
+    navigate("/select");
   };
 
   const retake = () => {
@@ -181,13 +220,38 @@ const WebcamCaptureModal = ({ onClose }) => {
             <button className="result-modal-btn" onClick={retake}>
               Retake Photo
             </button>
-            <button className="result-modal-btn" onClick={handleApprove}>
+            <button
+              className="result-modal-btn"
+              onClick={handleApprove}
+              disabled={isPosting}
+            >
               Approve & Upload
             </button>
             <button className="result-modal-btn" onClick={onClose}>
               Cancel
             </button>
           </div>
+          {isPosting && (
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100vw",
+                height: "100vh",
+                background: "rgba(0,0,0,0.7)",
+                color: "#fff",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: 40,
+                fontWeight: 700,
+                zIndex: 10,
+              }}
+            >
+              ANALYZING IMAGE...
+            </div>
+          )}
         </>
       ) : (
         <>
