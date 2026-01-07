@@ -404,7 +404,6 @@
 .square-inner {
   border: 2.5px dashed rgba(108, 111, 117, 0.6); /* #6c6f75, 60% opacity */
   background: transparent;
-  z-index: 3;
   transition: width 0.2s, height 0.2s;
 }
 .square-outer {

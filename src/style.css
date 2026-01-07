@@ -52,7 +52,7 @@
   height: 160px;
   border-radius: 16px;
   transition: box-shadow 0.2s, transform 0.2s ease;
-  z-index: 500;
+  z-index: 1001;
 }
 
 .result-image-btn-wrapper {
