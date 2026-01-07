@@ -1,9 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TopNav from "../components/TopNav";
 
 const Summary = () => {
   const navigate = useNavigate();
+  // Example data object
+  // Example data with confidence arrays
+  const data = {
+    race: [
+      { label: "Black", value: 0.4 },
+      { label: "Asian", value: 0.3 },
+      { label: "White", value: 0.2 },
+      { label: "Latino", value: 0.1 },
+    ],
+    age: [
+      { label: "18-24", value: 0.1 },
+      { label: "25-34", value: 0.6 },
+      { label: "35-44", value: 0.2 },
+      { label: "45-54", value: 0.1 },
+    ],
+    gender: [
+      { label: "Female", value: 0.7 },
+      { label: "Male", value: 0.3 },
+    ],
+  };
+
+  const [selectedTab, setSelectedTab] = useState("race");
+
+  // Helper to get label and value
+  const tabOptions = [
+    { key: "race", label: "race", display: "RACE" },
+    { key: "age", label: "(age range)", display: "AGE" },
+    { key: "gender", label: "SEX", display: "GENDER" },
+  ];
+  const selected = tabOptions.find(t => t.key === selectedTab);
+
   return (
     <div
       style={{ minHeight: "100vh", position: "relative", background: "#fff" }}
@@ -65,33 +96,27 @@ const Summary = () => {
             gap: 6,
           }}
         >
-          {/* Race Section */}
-          <div
-            style={{ background: "#e0e0e0", borderRadius: 8, padding: 12, marginBottom: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
-          >
-            <div style={{ fontSize: 16, fontWeight: 600, marginBottom: 4 }}>
-              race
+          {tabOptions.map((tab, idx) => (
+            <div
+              key={tab.key}
+              onClick={() => setSelectedTab(tab.key)}
+              style={{
+                background: selectedTab === tab.key ? "#bdbdbd" : "#e0e0e0",
+                borderRadius: 8,
+                padding: 12,
+                marginBottom: 0,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                cursor: 'pointer',
+                border: selectedTab === tab.key ? '2px solid #333' : '2px solid transparent',
+                transition: 'background 0.2s, border 0.2s',
+              }}
+            >
+              <div style={{ fontSize: 16, fontWeight: 600, marginBottom: 4 }}>{tab.label}</div>
+              <div style={{ fontSize: 14, color: "#555" }}>{tab.display}</div>
             </div>
-            <div style={{ fontSize: 14, color: "#555" }}>RACE</div>
-          </div>
-          {/* Age Section */}
-          <div
-            style={{ background: "#e0e0e0", borderRadius: 8, padding: 12, marginBottom: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
-          >
-            <div style={{ fontSize: 16, fontWeight: 600, marginBottom: 4 }}>
-              (age range)
-            </div>
-            <div style={{ fontSize: 14, color: "#555" }}>AGE</div>
-          </div>
-          {/* Sex Section */}
-          <div
-            style={{ background: "#e0e0e0", borderRadius: 8, padding: 12, marginBottom: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
-          >
-            <div style={{ fontSize: 16, fontWeight: 600, marginBottom: 4 }}>
-              SEX
-            </div>
-            <div style={{ fontSize: 14, color: "#555" }}>GENDER</div>
-          </div>
+          ))}
         </div>
         {/* Middle Column (1.0) */}
         <div style={{ flex: 1, minWidth: 0, marginLeft: 6, background: '#e0e0e0', borderRadius: 12, padding: 24, display: 'flex', flexDirection: 'row', alignItems: 'flex-start', position: 'relative' }}>
@@ -134,7 +159,23 @@ const Summary = () => {
           </div>
         </div>
         {/* Right Column (0.5) */}
-        <div style={{ flex: 0.5, minWidth: 0, marginLeft: 6 }}></div>
+        <div style={{ flex: 0.5, minWidth: 0, marginLeft: 6, background: '#e0e0e0', borderRadius: 12, padding: 24, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', position: 'relative', height: '100%' }}>
+          <div style={{ fontSize: 28, fontWeight: 700, letterSpacing: 1, marginBottom: 8 }}>
+            {selected.display}
+          </div>
+          <div style={{ fontSize: 16, fontWeight: 600, color: '#333', marginBottom: 16 }}>A.I. CONFIDENCE</div>
+          <div style={{ width: '100%' }}>
+            {data[selected.key]
+              .slice()
+              .sort((a, b) => b.value - a.value)
+              .map((item, idx) => (
+                <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                  <span style={{ fontSize: 18 }}>{item.label}</span>
+                  <span style={{ fontSize: 18, fontWeight: 600 }}>{Math.round(item.value * 100)}%</span>
+                </div>
+              ))}
+          </div>
+        </div>
       </div>
       {/* Bottom left BACK button */}
       <button
