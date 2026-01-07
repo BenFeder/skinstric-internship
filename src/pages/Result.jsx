@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import Webcam from "react-webcam";
 import { useNavigate } from "react-router-dom";
-import { RotatingSquares } from "../components/TopNav";
+import { RotatingSquares, default as TopNav } from "../components/TopNav";
 import "../style.css";
 
 const CameraModal = ({ onAllow, onDeny }) => (
@@ -35,7 +35,7 @@ const Result = () => {
 
   return (
     <div className="result-page-root">
-      {/* ...existing code... */}
+      <TopNav />
       <div className="result-center-block result-camera-block">
         <RotatingSquares size={240}>
           <div className="result-image-btn-wrapper">
@@ -95,6 +95,15 @@ const Result = () => {
           </button>
         </div>
       )}
+      {/* Back Button Bottom Left */}
+      <button
+        className="result-back-btn"
+        onClick={() => navigate("/testing")}
+        aria-label="Back to Testing"
+      >
+        <span className="result-back-arrow">&#8592;</span>
+        <span className="result-back-text">BACK</span>
+      </button>
     </div>
   );
 };

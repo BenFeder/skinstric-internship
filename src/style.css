@@ -1,3 +1,53 @@
+/* Top nav styles (if not already present) */
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 56px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  z-index: 10000;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+/* Back button bottom left */
+.result-back-btn {
+  position: fixed;
+  left: 8px;
+  bottom: 8px;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  color: #222;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 8px 18px 8px 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  cursor: pointer;
+  z-index: 10001;
+  transition: background 0.15s;
+}
+.result-back-btn:hover {
+  background: #f2f2f2;
+}
+.result-back-arrow {
+  font-size: 22px;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+}
+.result-back-text {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
 .result-image-btn-wrapper {
   position: relative;
   width: 100%;
