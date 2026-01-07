@@ -12,8 +12,8 @@ const Summary = () => {
       const apiData = JSON.parse(localStorage.getItem("apiData"));
       if (apiData) {
         // Normalize API data: convert { key: prob } to [{ label, value }]
-        const normalize = obj =>
-          obj && typeof obj === 'object'
+        const normalize = (obj) =>
+          obj && typeof obj === "object"
             ? Object.entries(obj).map(([label, value]) => ({ label, value }))
             : [];
         setData({
@@ -37,7 +37,7 @@ const Summary = () => {
     { key: "age", label: "(age range)", display: "AGE" },
     { key: "gender", label: "SEX", display: "GENDER" },
   ];
-  const selected = tabOptions.find(t => t.key === selectedTab);
+  const selected = tabOptions.find((t) => t.key === selectedTab);
 
   return (
     <div
@@ -109,25 +109,54 @@ const Summary = () => {
                 borderRadius: 8,
                 padding: 12,
                 marginBottom: 0,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-start',
-                cursor: 'pointer',
-                border: selectedTab === tab.key ? '2px solid #333' : '2px solid transparent',
-                transition: 'background 0.2s, border 0.2s',
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                cursor: "pointer",
+                border:
+                  selectedTab === tab.key
+                    ? "2px solid #333"
+                    : "2px solid transparent",
+                transition: "background 0.2s, border 0.2s",
               }}
             >
-              <div style={{ fontSize: 16, fontWeight: 600, marginBottom: 4 }}>{tab.label}</div>
+              <div style={{ fontSize: 16, fontWeight: 600, marginBottom: 4 }}>
+                {tab.label}
+              </div>
               <div style={{ fontSize: 14, color: "#555" }}>{tab.display}</div>
             </div>
           ))}
         </div>
         {/* Middle Column (1.0) */}
-        <div style={{ flex: 1, minWidth: 0, marginLeft: 6, background: '#e0e0e0', borderRadius: 12, padding: 24, display: 'flex', flexDirection: 'row', alignItems: 'flex-start', position: 'relative' }}>
+        <div
+          style={{
+            flex: 1,
+            minWidth: 0,
+            marginLeft: 6,
+            background: "#e0e0e0",
+            borderRadius: 12,
+            padding: 24,
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "flex-start",
+            position: "relative",
+          }}
+        >
           {/* Data heading (default: race) */}
-          <div style={{ fontSize: 20, fontWeight: 700, alignSelf: 'flex-start' }}>race</div>
+          <div
+            style={{ fontSize: 20, fontWeight: 700, alignSelf: "flex-start" }}
+          >
+            race
+          </div>
           {/* Percentage Circle */}
-          <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', height: 260 }}>
+          <div
+            style={{
+              marginLeft: "auto",
+              display: "flex",
+              alignItems: "center",
+              height: 260,
+            }}
+          >
             <svg width="260" height="260" viewBox="0 0 260 260">
               <circle
                 cx="130"
@@ -147,7 +176,7 @@ const Summary = () => {
                 strokeDasharray={2 * Math.PI * 120}
                 strokeDashoffset={2 * Math.PI * 120 * (1 - 0.6)}
                 transform="rotate(-90 130 130)"
-                style={{ transition: 'stroke-dashoffset 0.5s' }}
+                style={{ transition: "stroke-dashoffset 0.5s" }}
               />
               <text
                 x="130"
@@ -163,21 +192,62 @@ const Summary = () => {
           </div>
         </div>
         {/* Right Column (0.5) */}
-        <div style={{ flex: 0.5, minWidth: 0, marginLeft: 6, background: '#e0e0e0', borderRadius: 12, padding: 24, display: 'flex', flexDirection: 'column', alignItems: 'stretch', position: 'relative', height: '100%' }}>
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 16, width: '100%' }}>
+        <div
+          style={{
+            flex: 0.5,
+            minWidth: 0,
+            marginLeft: 6,
+            background: "#e0e0e0",
+            borderRadius: 12,
+            padding: 24,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "stretch",
+            position: "relative",
+            height: "100%",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              marginBottom: 16,
+              width: "100%",
+            }}
+          >
             <div style={{ fontSize: 28, fontWeight: 700, letterSpacing: 1 }}>
               {selected.display}
             </div>
-            <div style={{ marginLeft: 'auto', fontSize: 16, fontWeight: 600, color: '#333' }}>A.I. CONFIDENCE</div>
+            <div
+              style={{
+                marginLeft: "auto",
+                fontSize: 16,
+                fontWeight: 600,
+                color: "#333",
+              }}
+            >
+              A.I. CONFIDENCE
+            </div>
           </div>
-          <div style={{ width: '100%' }}>
+          <div style={{ width: "100%" }}>
             {data[selected.key]
               .slice()
               .sort((a, b) => b.value - a.value)
               .map((item, idx) => (
-                <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                  <span style={{ fontSize: 18 }}>{item.label}</span>
-                  <span style={{ fontSize: 18, fontWeight: 600 }}>{Math.round(item.value * 100)}%</span>
+                <div
+                  key={item.label}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginBottom: 8,
+                  }}
+                >
+                  <span style={{ fontSize: 18 }}>{item.label.charAt(0).toUpperCase() + item.label.slice(1)}</span>
+                  <span style={{ fontSize: 18, fontWeight: 600 }}>
+                    {Math.round(item.value * 100)}%
+                  </span>
                 </div>
               ))}
           </div>
