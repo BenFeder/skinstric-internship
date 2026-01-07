@@ -1,6 +1,7 @@
 import TopNav from "../components/TopNav";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
+import styles from "./Testing.module.css";
 
 function Testing() {
   const navigate = useNavigate();
@@ -63,15 +64,15 @@ function Testing() {
       <div className="testing-nav-subtext">TO START ANALYSIS</div>
       <div className="center-content">
         <div
-          className="rotating-square square-outermost testing-outermost"
+          className={`rotating-square square-outermost ${styles["testing-outermost"]}`}
           style={{ width: inputWidth + 96, height: inputWidth + 96 }}
         >
           <div
-            className="rotating-square square-outer testing-outer"
+            className={`rotating-square square-outer ${styles["testing-outer"]}`}
             style={{ width: inputWidth + 48, height: inputWidth + 48 }}
           >
             <div
-              className="rotating-square square-inner testing-inner"
+              className={`rotating-square square-inner ${styles["testing-inner"]}`}
               style={{ width: inputWidth, height: inputWidth }}
             ></div>
           </div>

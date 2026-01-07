@@ -1,0 +1,120 @@
+.result-modal {
+  /* ...existing modal styles... */
+}
+.result-modal-content {
+  /* ...existing modal content styles... */
+}
+.result-modal-btn {
+  /* ...existing modal button styles... */
+  white-space: nowrap;
+}
+.result-modal-btn + .result-modal-btn {
+  margin-left: 16px;
+}
+.result-modal-btn-row {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+.result-preview-modal {
+  position: relative;
+}
+.result-preview-title {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 4px;
+  white-space: nowrap;
+}
+.result-preview-img {
+  width: 250px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.result-preview-img-topright {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 20;
+}
+}
+.result-preview-btn-row {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+}
+.result-preview-btn {
+  /* ...existing preview button styles... */
+  white-space: nowrap;
+}
+.result-preview-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 700;
+  z-index: 10;
+}
+.result-error {
+  color: red;
+  margin-top: 8px;
+}
+.result-success {
+  color: green;
+  margin-top: 8px;
+}
+.result-flex-row {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+.result-flex-row-sm {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+/* Responsive styles for Result module */
+@media (max-width: 900px) {
+  .result-preview-title {
+    font-size: 16px;
+  }
+  .result-preview-img {
+    width: 200px;
+  }
+  .result-preview-overlay {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .result-modal-btn-row,
+  .result-preview-btn-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .result-modal-btn + .result-modal-btn {
+    margin-left: 0;
+  }
+  .result-preview-title {
+    font-size: 14px;
+  }
+  .result-preview-img {
+    width: 150px;
+  }
+  .result-preview-overlay {
+    font-size: 20px;
+  }
+  .result-flex-row,
+  .result-flex-row-sm {
+    flex-direction: column;
+    gap: 12px;
+  }
+}

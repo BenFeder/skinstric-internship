@@ -79,7 +79,10 @@ const GalleryApproveModal = ({ file, onRemove }) => {
         width="250px"
         className="result-preview-img"
       />
-      <div style={{ display: "flex", gap: 16, marginTop: 16 }}>
+      <div
+        className="result-preview-btn-row"
+        style={{ display: "flex", gap: 16, marginTop: 16 }}
+      >
         <button
           className="result-preview-btn"
           onClick={onRemove}
@@ -206,6 +209,7 @@ const WebcamCaptureModal = ({ onClose }) => {
             }}
           />
           <div
+            className="result-modal-btn-row"
             style={{
               position: "absolute",
               bottom: 40,

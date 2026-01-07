@@ -1,0 +1,84 @@
+.rotating-squares {
+  position: absolute;
+}
+.rotating-square {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  animation: rotate360 60s linear infinite;
+  box-sizing: border-box;
+}
+.square-inner {
+  border: 2.5px dashed rgba(108, 111, 117, 0.6); /* #6c6f75, 60% opacity */
+  background: transparent;
+  transition: width 0.2s, height 0.2s;
+  z-index: 3;
+  transform: rotate(0deg);
+}
+.square-outer {
+  border: 2.5px dashed rgba(160, 164, 171, 0.35); /* #a0a4ab, 35% opacity */
+  background: transparent;
+  z-index: 2;
+  transform: rotate(30deg);
+}
+.square-outermost {
+  border: 2.5px dashed rgba(199, 201, 206, 0.13); /* #c7c9ce, 13% opacity */
+  background: transparent;
+  z-index: 1;
+  transform: rotate(60deg);
+}
+.rotating-squares-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+}
+@keyframes rotate360 {
+  0% {
+    transform: rotate(45deg);
+  }
+  100% {
+    transform: rotate(405deg);
+  }
+}
+
+/* Responsive styles for rotating squares */
+@media (max-width: 900px) {
+  .rotating-square {
+    width: 200px !important;
+    height: 200px !important;
+  }
+  .square-inner {
+    border-width: 2px;
+  }
+  .square-outer {
+    border-width: 2px;
+  }
+  .square-outermost {
+    border-width: 2px;
+  }
+}
+
+@media (max-width: 600px) {
+  .rotating-square {
+    width: 160px !important;
+    height: 160px !important;
+  }
+  .square-inner {
+    border-width: 1.5px;
+  }
+  .square-outer {
+    border-width: 1.5px;
+  }
+  .square-outermost {
+    border-width: 1.5px;
+  }
+}

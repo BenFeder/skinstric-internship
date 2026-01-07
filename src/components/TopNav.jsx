@@ -1,5 +1,6 @@
 import React from "react";
 import "../App.css";
+import styles from "./RotatingSquares.module.css";
 
 function TopNav() {
   return (
@@ -16,60 +17,28 @@ function TopNav() {
 export default TopNav;
 export const RotatingSquares = ({ size, rotation = 0, children }) => (
   <div
-    className="rotating-squares"
+    className={styles["rotating-squares"]}
     style={{
-      position: "absolute",
       width: size + 64,
       height: size + 64,
       transform: `rotate(${rotation}deg)`,
     }}
   >
     <div
-      className="rotating-square square-outermost"
-      style={{
-        width: size + 64,
-        height: size + 64,
-        top: 0,
-        left: 0,
-        position: "absolute",
-        transform: "rotate(60deg)",
-      }}
+      className={`${styles["rotating-square"]} ${styles["square-outermost"]}`}
+      style={{ width: size + 64, height: size + 64, top: 0, left: 0 }}
     ></div>
     <div
-      className="rotating-square square-outer"
-      style={{
-        width: size + 32,
-        height: size + 32,
-        top: 16,
-        left: 16,
-        position: "absolute",
-        transform: "rotate(30deg)",
-      }}
+      className={`${styles["rotating-square"]} ${styles["square-outer"]}`}
+      style={{ width: size + 32, height: size + 32, top: 16, left: 16 }}
     ></div>
     <div
-      className="rotating-square square-inner"
-      style={{
-        width: size,
-        height: size,
-        top: 32,
-        left: 32,
-        position: "absolute",
-        transform: "rotate(0deg)",
-      }}
+      className={`${styles["rotating-square"]} ${styles["square-inner"]}`}
+      style={{ width: size, height: size, top: 32, left: 32 }}
     ></div>
     <div
-      className="rotating-squares-content"
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: size + 64,
-        height: size + 64,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        zIndex: 2,
-      }}
+      className={styles["rotating-squares-content"]}
+      style={{ width: size + 64, height: size + 64 }}
     >
       {children}
     </div>

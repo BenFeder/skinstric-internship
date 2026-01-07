@@ -1,3 +1,241 @@
+/* Responsive Design for Mobile and Tablet */
+@media (max-width: 900px) {
+  .app {
+    flex-direction: column;
+    min-height: 100vh;
+    height: auto;
+    width: 100vw;
+    overflow-x: hidden;
+    padding: 0;
+  }
+  .top-nav {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 9px;
+    padding: 6px;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .top-nav-left {
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+  }
+  .brand-name,
+  .intro-text {
+    font-size: 9px;
+  }
+  .enter-code-btn {
+    padding: 6px 10px;
+    font-size: 8px;
+  }
+  .center-overlay-content,
+  .rotating-content-wrapper {
+    width: 95vw;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0 8px;
+  }
+  .big-heading-input {
+    font-size: clamp(16px, 4vw, 28px);
+    width: 85vw;
+    max-width: 85vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .heading {
+    font-size: clamp(32px, 8vw, 52px) !important;
+    margin-bottom: 32px;
+  }
+  .input-label {
+    font-size: 11px;
+  }
+  .testing-nav-subtext {
+    font-size: 9px;
+    top: 52px !important;
+  }
+  .bottom-description {
+    font-size: 10px;
+    max-width: 90vw;
+    bottom: 20px;
+    left: 10px;
+  }
+  .take-test-btn,
+  .discover-ai-btn {
+    font-size: 10px;
+    padding: 6px 10px;
+  }
+  .take-test-btn {
+    right: auto;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 108px) !important;
+    position: absolute;
+  }
+  .discover-ai-btn {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 204px) !important;
+    position: absolute;
+  }
+  .proceed-text,
+  .back-text {
+    font-size: 11px;
+  }
+  .proceed-square,
+  .back-square {
+    width: 24px;
+    height: 24px;
+  }
+  .arrow-icon,
+  .arrow-icon-left,
+  .arrow-icon-right {
+    font-size: 14px;
+  }
+  .rotating-square {
+    width: 200px !important;
+    height: 200px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .app {
+    flex-direction: column;
+    min-height: 100vh;
+    height: auto;
+    width: 100vw;
+    overflow-x: hidden;
+    padding: 0;
+  }
+  .top-nav {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 7px;
+    padding: 4px;
+    gap: 4px;
+  }
+  .top-nav-left {
+    flex-direction: row;
+    gap: 4px;
+    align-items: center;
+  }
+  .brand-name,
+  .intro-text {
+    font-size: 7px;
+  }
+  .enter-code-btn {
+    padding: 4px 8px;
+    font-size: 7px;
+  }
+  .center-overlay-content,
+  .rotating-content-wrapper {
+    width: 98vw;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0 4px;
+  }
+  .big-heading-input {
+    font-size: clamp(14px, 3.5vw, 20px);
+    width: 80vw;
+    max-width: 80vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .heading {
+    font-size: clamp(24px, 7vw, 40px) !important;
+    margin-bottom: 32px;
+  }
+  .thankyou-main {
+    font-size: 14px;
+  }
+  .thankyou-sub {
+    font-size: 12px;
+  }
+  .input-label {
+    font-size: 10px;
+  }
+  .testing-nav-subtext {
+    font-size: 8px;
+    top: 48px !important;
+  }
+  .bottom-description {
+    font-size: 8px;
+    max-width: 95vw;
+    bottom: 15px;
+    left: 8px;
+    line-height: 1.2;
+  }
+  .take-test-btn,
+  .discover-ai-btn {
+    font-size: 8px;
+    padding: 4px 8px;
+    letter-spacing: 0.5px;
+  }
+  .proceed-text,
+  .back-text {
+    font-size: 9px;
+  }
+  .proceed-square,
+  .back-square {
+    width: 20px;
+    height: 20px;
+  }
+  .arrow-icon,
+  .arrow-icon-left,
+  .arrow-icon-right {
+    font-size: 12px;
+  }
+  .rotating-square {
+    width: 160px !important;
+    height: 160px !important;
+  }
+  .rectangle-left,
+  .rectangle-right {
+    width: 300px;
+    height: 300px;
+  }
+  .take-test-btn {
+    right: auto !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, 108px) !important;
+    font-size: 10px;
+    padding: 6px 12px;
+    gap: 6px;
+    position: absolute !important;
+    margin-top: 0;
+  }
+  .discover-ai-btn {
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, 204px) !important;
+    font-size: 10px;
+    padding: 6px 12px;
+    gap: 6px;
+    position: absolute !important;
+    margin-top: 0;
+  }
+  .proceed-btn {
+    bottom: 20px;
+    right: 10px;
+  }
+  .back-btn {
+    bottom: 20px;
+    left: 10px;
+  }
+}
 .scalable-image:hover {
   transform: scale(1.1);
 }
@@ -28,6 +266,22 @@
   align-items: center;
   width: 100%;
   z-index: 10;
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .center-overlay-content {
+    padding: 0 16px;
+    max-width: calc(100vw - 32px);
+  }
+}
+
+@media (max-width: 600px) {
+  .center-overlay-content {
+    padding: 0 12px;
+    max-width: calc(100vw - 24px);
+  }
 }
 .rotating-content-wrapper {
   position: relative;
@@ -49,6 +303,20 @@
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .app {
+    padding-top: 60px;
+    padding-bottom: 80px;
+  }
+}
+
+@media (max-width: 600px) {
+  .app {
+    padding-top: 70px;
+    padding-bottom: 60px;
+  }
 }
 
 .top-nav {
@@ -73,10 +341,12 @@
 .brand-name {
   color: #1a1b1c;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .intro-text {
   color: #1a1b1c;
+  white-space: nowrap;
 }
 
 .enter-code-btn {
@@ -85,6 +355,7 @@
   padding: 8px 16px;
   cursor: pointer;
   transition: opacity 0.3s ease;
+  white-space: nowrap;
 }
 .input-label {
   font-size: 14px;
@@ -186,6 +457,7 @@
   color: #1a1b1c;
   font-family: roobert, "roobert Fallback", sans-serif;
   margin-right: 0;
+  white-space: nowrap;
 }
 
 .enter-code-btn:hover {
@@ -202,6 +474,33 @@
   max-width: 350px;
   line-height: 1.4;
   margin: 0;
+  z-index: 5;
+}
+
+@media (max-width: 900px) {
+  .bottom-description {
+    display: block;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    max-width: 80vw;
+    font-size: 9px;
+    line-height: 1.3;
+  }
+}
+
+@media (max-width: 600px) {
+  .bottom-description {
+    display: block;
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    max-width: 85vw;
+    font-size: 8px;
+    line-height: 1.2;
+  }
 }
 
 .rectangle-left {
@@ -251,6 +550,7 @@
   padding: 10px 15px;
   transition: transform 0.3s ease, opacity 0.3s ease;
   z-index: 10;
+  white-space: nowrap;
 }
 
 .take-test-btn:hover {
@@ -276,6 +576,7 @@
   letter-spacing: 1px;
   z-index: 10;
   transition: transform 0.3s ease;
+  white-space: nowrap;
 }
 
 .discover-ai-btn:hover {
@@ -374,6 +675,7 @@
   font-weight: bold;
   color: #1a1b1c;
   font-family: roobert, "roobert Fallback", sans-serif;
+  white-space: nowrap;
 }
 
 .center-content {
@@ -389,6 +691,20 @@
   z-index: 1;
 }
 
+@media (max-width: 900px) {
+  .center-content {
+    padding: 0 16px;
+    max-width: calc(100vw - 32px);
+  }
+}
+
+@media (max-width: 600px) {
+  .center-content {
+    padding: 0 12px;
+    max-width: calc(100vw - 24px);
+  }
+}
+
 .rotating-square {
   display: flex;
   align-items: center;
@@ -396,10 +712,12 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) rotate(45deg);
+  transform: translate(-50%, -50%);
   background: transparent;
   animation: rotate360 60s linear infinite;
   box-sizing: border-box;
+  max-width: 90vw;
+  max-height: 90vh;
 }
 .square-inner {
   border: 2.5px dashed rgba(108, 111, 117, 0.6); /* #6c6f75, 60% opacity */
@@ -410,11 +728,13 @@
   border: 2.5px dashed rgba(160, 164, 171, 0.35); /* #a0a4ab, 35% opacity */
   background: transparent;
   z-index: 2;
+  transform: rotate(30deg);
 }
 .square-outermost {
   border: 2.5px dashed rgba(199, 201, 206, 0.13); /* #c7c9ce, 13% opacity */
   background: transparent;
   z-index: 1;
+  transform: rotate(60deg);
 }
 @keyframes rotate360 {
   0% {
@@ -439,6 +759,13 @@
   margin-top: 16px;
   font-weight: 500;
   letter-spacing: 1px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .big-heading-input {
+    max-width: calc(100vw - 40px);
+  }
 }
 
 .big-heading-input::placeholder {

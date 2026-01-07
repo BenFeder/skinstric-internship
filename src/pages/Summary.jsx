@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import styles from "../Summary.module.css";
 import { useNavigate } from "react-router-dom";
 import TopNav from "../components/TopNav";
 
@@ -53,128 +54,51 @@ const Summary = () => {
   }, [selectedTab, data]);
 
   return (
-    <div
-      style={{ minHeight: "100vh", position: "relative", background: "#fff" }}
-    >
+    <div className={styles["summary-root"]}>
       <TopNav />
-      <div
-        style={{
-          marginLeft: 24,
-          marginTop: 96,
-          marginBottom: 32,
-          maxWidth: "100vw",
-          overflowWrap: "break-word",
-        }}
-      >
-        <div
-          style={{
-            fontWeight: 900,
-            fontSize: 16,
-            marginBottom: 0,
-            letterSpacing: 0.5,
-            lineHeight: 1,
-          }}
-        >
-          A.I. ANALYSIS
-        </div>
-        <div
-          style={{
-            fontSize: 72,
-            fontWeight: "normal",
-            marginBottom: 0,
-            lineHeight: 1,
-          }}
-        >
-          DEMOGRAPHICS
-        </div>
-        <div style={{ fontSize: 14, marginBottom: 0, lineHeight: 1 }}>
-          PREDICTED RACE & AGE
-        </div>
+      <div className={styles["summary-header"]}>
+        <div className={styles["summary-title"]}>A.I. ANALYSIS</div>
+        <div className={styles["summary-heading"]}>DEMOGRAPHICS</div>
+        <div className={styles["summary-subtitle"]}>PREDICTED RACE & AGE</div>
       </div>
       {/* Demographic Data Row */}
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          width: "100%",
-          marginTop: 128,
-          gap: 6,
-        }}
-      >
+      <div className={styles["summary-row"]}>
         {/* Left Column (0.25) */}
-        <div
-          style={{
-            flex: 0.25,
-            display: "flex",
-            flexDirection: "column",
-            minWidth: 0,
-            marginLeft: 16,
-            marginTop: 32,
-            gap: 6,
-          }}
-        >
+        <div className={styles["summary-left"]}>
           {tabOptions.map((tab, idx) => {
-            // Get top-ranked field for each category
             const topItem =
               data[tab.key] && data[tab.key].length > 0
                 ? [...data[tab.key]].sort((a, b) => b.value - a.value)[0]
                 : null;
+            const selectedTabClass =
+              selectedTab === tab.key ? styles.selected : "";
             return (
               <div
                 key={tab.key}
                 onClick={() => setSelectedTab(tab.key)}
-                style={{
-                  background: selectedTab === tab.key ? "#111" : "#e0e0e0",
-                  color: selectedTab === tab.key ? "#fff" : "#111",
-                  borderRadius: 8,
-                  padding: 12,
-                  marginBottom: 0,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  cursor: "pointer",
-                  border:
-                    selectedTab === tab.key
-                      ? "2px solid #333"
-                      : "2px solid transparent",
-                  transition: "background 0.2s, border 0.2s, color 0.2s",
-                }}
+                className={`${styles["summary-tab"]} ${selectedTabClass}`}
               >
-                <div style={{ fontSize: 16, fontWeight: 600, marginBottom: 4, color: selectedTab === tab.key ? "#fff" : "#111" }}>
+                <div
+                  className={`${styles["summary-tab-label"]} ${selectedTabClass}`}
+                >
                   {topItem
                     ? topItem.label.charAt(0).toUpperCase() +
                       topItem.label.slice(1)
                     : tab.label}
                 </div>
-                <div style={{ fontSize: 14, color: selectedTab === tab.key ? "#fff" : "#555" }}>{tab.display}</div>
+                <div
+                  className={`${styles["summary-tab-display"]} ${selectedTabClass}`}
+                >
+                  {tab.display}
+                </div>
               </div>
             );
           })}
         </div>
         {/* Middle Column (1.0) */}
-        <div
-          style={{
-            flex: 1,
-            minWidth: 0,
-            marginLeft: 6,
-            background: "#e0e0e0",
-            borderRadius: 12,
-            padding: 24,
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "flex-start",
-            position: "relative",
-          }}
-        >
+        <div className={styles["summary-middle"]}>
           {/* Data heading: selected field label or default */}
-          <div
-            style={{
-              fontSize: 20,
-              fontWeight: 700,
-              alignSelf: "flex-start",
-              textTransform: "capitalize",
-            }}
-          >
+          <div className={styles["summary-middle-label"]}>
             {selectedField
               ? selectedField.label.charAt(0).toUpperCase() +
                 selectedField.label.slice(1)
@@ -182,14 +106,7 @@ const Summary = () => {
                 selected.label.slice(1)}
           </div>
           {/* Percentage Circle: show selected field's value or default */}
-          <div
-            style={{
-              marginLeft: "auto",
-              display: "flex",
-              alignItems: "center",
-              height: 260,
-            }}
-          >
+          <div className={styles["summary-middle-circle"]}>
             <svg width="260" height="260" viewBox="0 0 260 260">
               <circle
                 cx="130"
@@ -236,83 +153,45 @@ const Summary = () => {
           </div>
         </div>
         {/* Right Column (0.5) */}
-        <div
-          style={{
-            flex: 0.5,
-            minWidth: 0,
-            marginLeft: 6,
-            background: "#e0e0e0",
-            borderRadius: 12,
-            padding: 24,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "stretch",
-            position: "relative",
-            height: "100%",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              marginBottom: 16,
-              width: "100%",
-            }}
-          >
-            <div style={{ fontSize: 28, fontWeight: 700, letterSpacing: 1 }}>
+        <div className={styles["summary-right"]}>
+          <div className={styles["summary-right-header"]}>
+            <div className={styles["summary-right-title"]}>
               {selected.display}
             </div>
-            <div
-              style={{
-                marginLeft: "auto",
-                fontSize: 16,
-                fontWeight: 600,
-                color: "#333",
-              }}
-            >
+            <div className={styles["summary-right-confidence"]}>
               A.I. CONFIDENCE
             </div>
           </div>
-          <div style={{ width: "100%" }}>
+          <div className={styles["summary-right-list"]}>
             {data[selected.key]
               .slice()
               .sort((a, b) => b.value - a.value)
-              .map((item, idx) => (
-                <div
-                  key={item.label}
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: 8,
-                    cursor: "pointer",
-                    border:
-                      selectedField && selectedField.label === item.label
-                        ? "2px solid #333"
-                        : "2px solid transparent",
-                    borderRadius: 6,
-                    background:
-                      selectedField && selectedField.label === item.label
-                        ? "#d3d3d3"
-                        : "transparent",
-                    transition: "background 0.2s, border 0.2s",
-                  }}
-                  onClick={() => setSelectedField(item)}
-                >
-                  <span style={{ fontSize: 18 }}>
-                    {item.label.charAt(0).toUpperCase() + item.label.slice(1)}
-                  </span>
-                  <span style={{ fontSize: 18, fontWeight: 600 }}>
-                    {Math.round(item.value * 100)}%
-                  </span>
-                </div>
-              ))}
+              .map((item, idx) => {
+                const selectedItemClass =
+                  selectedField && selectedField.label === item.label
+                    ? styles.selected
+                    : "";
+                return (
+                  <div
+                    key={item.label}
+                    className={`${styles["summary-right-item"]} ${selectedItemClass}`}
+                    onClick={() => setSelectedField(item)}
+                  >
+                    <span className={styles["summary-right-item-label"]}>
+                      {item.label.charAt(0).toUpperCase() + item.label.slice(1)}
+                    </span>
+                    <span className={styles["summary-right-item-value"]}>
+                      {Math.round(item.value * 100)}%
+                    </span>
+                  </div>
+                );
+              })}
           </div>
         </div>
       </div>
       {/* Bottom left BACK button */}
       <button
+        className={styles["summary-back-btn"]}
         style={{
           position: "fixed",
           bottom: 24,
@@ -333,6 +212,7 @@ const Summary = () => {
       </button>
       {/* Bottom right HOME button */}
       <button
+        className={styles["summary-home-btn"]}
         style={{
           position: "fixed",
           bottom: 24,
