@@ -49,27 +49,25 @@
 /* Stack buttons in center only when screen is small enough */
 @media (max-width: 900px) {
   .take-test-btn {
-    position: absolute;
-    right: auto;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, 80px) !important;
+    position: static;
+    transform: none !important;
+    margin: 0 !important;
+    padding: 6px 10px !important;
   }
 
   .take-test-btn:hover {
-    transform: translate(-50%, 80px) scale(1.1) !important;
+    transform: none !important;
   }
 
   .discover-ai-btn {
-    position: absolute;
-    right: auto;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, 150px) !important;
+    position: static;
+    transform: none !important;
+    margin: 0 !important;
+    padding: 6px 10px !important;
   }
 
   .discover-ai-btn:hover {
-    transform: translate(-50%, 150px) scale(1.1) !important;
+    transform: none !important;
   }
 }
 
@@ -144,19 +142,12 @@
   .discover-ai-btn {
     font-size: 10px;
     padding: 6px 10px;
-  }
-  .take-test-btn {
+    position: static;
+    transform: none !important;
+    margin: 0 !important;
+    left: auto;
     right: auto;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, 108px) !important;
-    position: absolute;
-  }
-  .discover-ai-btn {
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, 204px) !important;
-    position: absolute;
+    top: auto;
   }
   .proceed-text,
   .back-text {
@@ -180,12 +171,15 @@
 
 @media (max-width: 600px) {
   .app {
+    display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    align-items: center;
+    gap: 16px;
+    /* min-height: 100vh;
     height: auto;
     width: 100vw;
     overflow-x: hidden;
-    padding: 0;
+    padding: 0; */
   }
   .top-nav {
     position: absolute;
