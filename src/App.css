@@ -1,4 +1,78 @@
 /* Responsive Design for Mobile and Tablet */
+/* Center content but keep buttons on sides until they need to stack */
+@media (max-width: 1200px) {
+  .rectangle-left {
+    left: -250px;
+  }
+
+  .rectangle-right {
+    right: -250px;
+  }
+
+  .bottom-description {
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
+
+  .heading {
+    text-align: center !important;
+  }
+
+  .heading-shifted {
+    transform: none !important;
+    text-align: center !important;
+  }
+}
+
+/* Adjust button horizontal position as screen narrows */
+@media (max-width: 1000px) {
+  .take-test-btn {
+    right: 50px;
+  }
+
+  .discover-ai-btn {
+    left: 50px;
+  }
+}
+
+@media (max-width: 800px) {
+  .take-test-btn {
+    right: 20px;
+  }
+
+  .discover-ai-btn {
+    left: 20px;
+  }
+}
+
+/* Stack buttons in center only when screen is small enough */
+@media (max-width: 900px) {
+  .take-test-btn {
+    position: absolute;
+    right: auto;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 80px) !important;
+  }
+
+  .take-test-btn:hover {
+    transform: translate(-50%, 80px) scale(1.1) !important;
+  }
+
+  .discover-ai-btn {
+    position: absolute;
+    right: auto;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 150px) !important;
+  }
+
+  .discover-ai-btn:hover {
+    transform: translate(-50%, 150px) scale(1.1) !important;
+  }
+}
+
 @media (max-width: 900px) {
   .app {
     flex-direction: column;
