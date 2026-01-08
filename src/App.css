@@ -214,12 +214,16 @@
     padding: 0 4px;
   }
   .big-heading-input {
-    font-size: clamp(14px, 3.5vw, 20px);
-    width: 80vw;
-    max-width: 80vw;
+    font-size: 12px;
+    width: 60vw;
+    max-width: 60vw;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    padding: 4px 8px;
+  }
+  .big-heading-input::placeholder {
+    font-size: 24px;
   }
   .heading {
     font-size: clamp(24px, 7vw, 40px) !important;
