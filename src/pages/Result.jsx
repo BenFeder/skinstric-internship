@@ -363,42 +363,36 @@ const Result = () => {
       <TopNav />
       <div className="result-center-block result-camera-block">
         <RotatingSquares size={240}>
-          <div className="result-image-btn-wrapper">
-            <button
-              className="result-image camera-btn"
-              onClick={handleCameraClick}
-            >
-              <img
-                src="/assets/camera.png"
-                alt="Camera"
-                className="result-image camera-image"
-              />
-            </button>
-          </div>
+          <img
+            src="/assets/camera.png"
+            alt="Camera"
+            className="result-image camera-btn"
+            onClick={handleCameraClick}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === "Enter" && handleCameraClick()}
+          />
         </RotatingSquares>
       </div>
       {/* Gallery Button */}
       <div className="result-center-block result-gallery-block">
         <RotatingSquares size={240}>
-          <div className="result-image-btn-wrapper">
-            <button
-              className="result-image gallery-btn"
-              onClick={handleGalleryClick}
-            >
-              <img
-                src="/assets/gallery.png"
-                alt="Gallery"
-                className="result-image gallery-image"
-              />
-            </button>
-            <input
-              type="file"
-              accept="image/*"
-              ref={fileInputRef}
-              className="result-file-input"
-              onChange={handleImageChange}
-            />
-          </div>
+          <img
+            src="/assets/gallery.png"
+            alt="Gallery"
+            className="result-image gallery-btn"
+            onClick={handleGalleryClick}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === "Enter" && handleGalleryClick()}
+          />
+          <input
+            type="file"
+            accept="image/*"
+            ref={fileInputRef}
+            className="result-file-input"
+            onChange={handleImageChange}
+          />
         </RotatingSquares>
       </div>
 
